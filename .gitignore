@@ -1,0 +1,19 @@
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore Python cache files (if any python scripts present)
+__pycache__/
+*.py[cod]
+
+# Ignore IDE/editor configs (add yours if you want)
+.vscode/
+.idea/
+*.swp
+
+# Ignore node_modules (if you add any JS packages later)
+node_modules/
+
+# Ignore build or deployment folders if any
+dist/
+build/
