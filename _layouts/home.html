@@ -19,7 +19,7 @@ layout: default
       />
     </div>
 
-    <!-- Text and Icons -->
+    <!-- Text and Links -->
     <div style="text-align: left; max-width: 500px;">
       <h1 style="margin: 0;">{{ site.title }}</h1>
 
@@ -30,20 +30,16 @@ layout: default
         Autonomous Systems Lab
       </p>
 
-      <!-- Social Icons -->
-      <div style="font-size: 1.5em; margin-top: 1em;">
-        <a href="https://github.com/axgeorge" target="_blank" style="margin-right: 15px; color: var(--links);">
-          <i class="fab fa-github"></i>
-        </a>
-        <a href="https://linkedin.com/in/algeph" target="_blank" style="margin-right: 15px; color: var(--links);">
-          <i class="fab fa-linkedin"></i>
-        </a>
-        <a href="https://scholar.google.com/citations?user=OSeY4LAAAAAJ&hl=en" target="_blank" style="margin-right: 15px; color: var(--links);">
-          <i class="ai ai-google-scholar"></i>
-        </a>
+      <!-- Social Links (Plain Text) -->
+      <div style="margin-top: 1em; line-height: 1.8;">
+        🔗 <a href="https://github.com/axgeorge" target="_blank" style="color: var(--links);">GitHub</a><br />
+        🔗 <a href="https://linkedin.com/in/algeph" target="_blank" style="color: var(--links);">LinkedIn</a><br />
+        🔗 <a href="https://scholar.google.com/citations?user=OSeY4LAAAAAJ&hl=en" target="_blank" style="color: var(--links);">Google Scholar</a><br />
+        📧 <a href="mailto:axgeorgephilip@gmail.com" style="color: var(--links);">axgeorge@gmail.com</a>
       </div>
     </div>
   </div>
+</header>
 
 </header>
 
@@ -51,22 +47,53 @@ layout: default
 {{ content }}
 
 {% if site.theme_config.show_research == true %}
-  <h2>{{ site.theme_config.home.title_research }}</h2>
+  <h2 style="font-size: 2em; margin-top: 2em;">{{ site.theme_config.home.title_research }}</h2>
 
-  <div class="research-list">
-    {% for project in site.data.home.research_entries %}
-      <div class="research-item">
-        <h3>{{ project.title }}</h3>
-        {% if project.video_url %}
-          <div class="video-container">
-            <iframe width="560" height="315" src="{{ project.video_url }}" frameborder="0" allowfullscreen></iframe>
+  <div style="background-color: var(--bg-secondary); padding: 2em; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+    <div class="research-list">
+      {% for project in site.data.home.research_entries %}
+        <div class="research-item" style="margin-bottom: 2em;">
+          <h3>{{ project.title }}</h3>
+          {% if project.video_url %}
+            <div class="video-container" style="margin: 1em 0;">
+              <iframe width="560" height="315" src="{{ project.video_url }}" frameborder="0" allowfullscreen></iframe>
+            </div>
+          {% endif %}
+          <p>{{ project.description }}</p>
+          <p><strong>Published in:</strong> {{ project.journal_conference }}</p>
+          <a href="{{ project.paper_link }}" class="paper-link" target="_blank" style="font-weight: bold;">Read Paper</a>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}
+
+
+{% if site.data.home.other_project_entries %}
+  <h2 style="font-size: 2em; margin-top: 2em;">Other Projects</h2>
+  
+  <div style="background-color: var(--bg-secondary); padding: 2em; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+    <div class="project-list">
+      {% for project in site.data.home.other_project_entries %}
+        <div class="project-entry" style="display: flex; gap: 1.5em; margin-bottom: 2em; flex-wrap: wrap;">
+          {% if project.media %}
+            <div style="flex: 1 1 300px; min-width: 200px;">
+              <img src="{{ project.media }}" alt="project media" style="width: 100%; border-radius: 8px;" />
+            </div>
+          {% endif %}
+          <div style="flex: 2 1 400px;">
+            <h3 style="margin-top: 0;">{{ project.title }}</h3>
+            <p style="margin: 0.5em 0;">{{ project.desc }}</p>
+            {% if project.venue %}
+              <p style="color: var(--text-secondary); margin: 0.5em 0;">{{ project.venue }}</p>
+            {% endif %}
+            {% if project.paper_url %}
+              <a href="{{ project.paper_url }}" target="_blank" style="font-weight: bold;">Project Link</a>
+            {% endif %}
           </div>
-        {% endif %}
-        <p>{{ project.description }}</p>
-        <p><strong>Published in:</strong> {{ project.journal_conference }}</p>
-        <a href="{{ project.paper_link }}" class="paper-link" target="_blank">Read Paper</a>
-      </div>
-    {% endfor %}
+        </div>
+      {% endfor %}
+    </div>
   </div>
 {% endif %}
 

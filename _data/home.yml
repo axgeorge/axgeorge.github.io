@@ -115,3 +115,18 @@ research_entries:
     description: "This is a brief description of Project 3. The project addresses key issues in the field of XYZ."
     journal_conference: "Published in DEF Journal, 2021"
     paper_link: 
+
+
+other_project_entries:
+  - title: Project 1
+    desc: 
+    media: 
+    venue: Personal Project
+    paper_url: 
+
+  - title: Project 2
+    desc: 
+    media: 
+    venue: Personal Project
+    paper_url: 
+
