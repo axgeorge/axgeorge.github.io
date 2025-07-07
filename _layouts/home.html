@@ -2,47 +2,49 @@
 layout: default
 ---
 
-<header style="display: flex; align-items: center; justify-content: center; margin-bottom: 2em; gap: 2em; flex-wrap: wrap;">
-
+<header style="margin-bottom: 2em;">
   {% if site.theme_config.show_navbar == true %}
-    <div style="width: 100%; margin-bottom: 1em;">
-      {% include horizontal_list.html collection=site.data.home.navbar_entries %}
-      <div class="dashed"></div>
-    </div>
+    {% include horizontal_list.html collection=site.data.home.navbar_entries %}
+    <div class="dashed"></div>
   {% endif %}
 
-  <!-- Picture on the left -->
-  <img
-    src="/assets/images/profile.jpeg"
-    alt="Allen George Philip"
-    style="border-radius: 50%; width: 180px; height: 180px; object-fit: cover; flex-shrink: 0;"
-  />
+  <div style="display: flex; align-items: center; justify-content: center; gap: 2em; flex-wrap: wrap;">
 
-  <!-- Right side: Name, affiliations, and social icons -->
-  <div style="max-width: 600px;">
+    <!-- Profile Picture on the Left -->
+    <div>
+      <img
+        src="/assets/images/profilepic.jpeg"
+        alt="Allen George Philip"
+        style="border-radius: 50%; width: 180px; height: 180px; object-fit: cover;"
+      />
+    </div>
 
-    <!-- Name -->
-    <h1 style="margin-top: 0; margin-bottom: 0.3em;">{{ site.title }}</h1>
+    <!-- Text Content on the Right -->
+    <div style="text-align: left; max-width: 500px;">
+      <h1 style="margin: 0;">{{ site.title }}</h1>
 
-    <!-- Affiliations -->
-    <p style="font-style: italic; color: var(--text-secondary); margin-top: 0; margin-bottom: 1em;">
-      PhD Candidate, Department of Mechanical Engineering, Texas A&M University<br />
-      Autonomous Systems Lab
-    </p>
+      <p style="font-style: italic; color: var(--text-secondary); margin: 0.5em 0;">
+        PhD Candidate<br />
+        Department of Mechanical Engineering<br />
+        Texas A&M University<br />
+        Autonomous Systems Lab
+      </p>
 
-    <!-- Social Icons -->
-    <div style="font-size: 1.8em;">
-      <a href="https://github.com/axgeorge" target="_blank" style="margin-right: 15px; color: var(--links);">
-        <i class="fab fa-github"></i>
-      </a>
-      <a href="https://linkedin.com/in/algeph" target="_blank" style="margin-right: 15px; color: var(--links);">
-        <i class="fab fa-linkedin"></i>
-      </a>
-      <a href="https://scholar.google.com/citations?user=OSeY4LAAAAAJ&hl=en" target="_blank" style="color: var(--links);">
-        <i class="ai ai-google-scholar"></i>
-      </a>
+      <!-- Social Icons -->
+      <div style="font-size: 1.5em; margin-top: 1em;">
+        <a href="https://github.com/axgeorge" target="_blank" style="margin-right: 15px; color: var(--links);">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://linkedin.com/in/algeph" target="_blank" style="margin-right: 15px; color: var(--links);">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://scholar.google.com/citations?user=OSeY4LAAAAAJ&hl=en" target="_blank" style="margin-right: 15px; color: var(--links);">
+          <i class="ai ai-google-scholar"></i>
+        </a>
+      </div>
     </div>
   </div>
+</header>
 
 </header>
 
