@@ -98,35 +98,22 @@ misc_entries:
 
 
 research_entries:
-  - title: "Project Title 1"
-    video_url: 
-    description: "This is a brief description of Project 1. It outlines the key aspects of the research."
-    journal_conference: "Published in XYZ Journal, 2023"
-    paper_link: 
-  
-  - title: "Project Title 2"
-    video_url: 
-    description: "This is a brief description of Project 2. It highlights the findings and contributions of the research."
-    journal_conference: "Presented at ABC Conference, 2022"
-    paper_link:
-  
-  - title: "Project Title 3"
-    video_url:
-    description: "This is a brief description of Project 3. The project addresses key issues in the field of XYZ."
-    journal_conference: "Published in DEF Journal, 2021"
+
+    # For research_entries or other_project_entries
+  - title: "Example Project"
+    media: 
+    description: "Brief description here"
+    journal_conference: "Conference name or Journal"
+    github_link: 
     paper_link: 
 
 
 other_project_entries:
-  - title: Project 1
-    desc: 
-    media: 
-    venue: Personal Project
-    paper_url: 
-
-  - title: Project 2
-    desc: 
-    media: 
-    venue: Personal Project
-    paper_url: 
+  
+  - title: "Other Project"
+    media: "https://link-to-media.gif"
+    desc: "Description"
+    venue: "Venue or conference"
+    github_link: "https://github.com/username/otherproject"
+    paper_url: "https://link-to-paper-or-project"
 

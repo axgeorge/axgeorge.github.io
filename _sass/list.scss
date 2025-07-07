@@ -57,57 +57,95 @@ ul.horizontal-list {
 }
 
 
-.research-list {
+/* Container for research projects */
+.research-list,
+.project-list {
   display: flex;
-  flex-direction: column;  /* Stack items vertically */
-  gap: 2em;  /* Space between projects */
+  flex-direction: column;
+  gap: 2.5em;
+  color: var(--text);
 }
 
-.research-item {
+/* Each project item */
+.research-item,
+.project-item {
   background-color: transparent; /* no background */
-  padding: 0;                    /* remove padding */
-  box-shadow: none;              /* remove shadow */
+  padding: 0;                    /* no padding */
+  box-shadow: none;              /* no shadow */
   width: 100%;
-  margin-bottom: 2em;            /* keep some spacing between projects */
+  margin-bottom: 2em;
 }
 
-.research-item h3 {
-  font-size: 1.5em;
+/* Project titles */
+.research-item h3,
+.project-item h3 {
+  font-size: 1.7em;
   margin-bottom: 0.8em;
 }
 
-.research-item .video-container {
-  margin-bottom: 1.5em;
+/* Container for media (image/video/iframe) */
+.media-container {
+  margin-bottom: 1em;
+  max-width: 100%;
 }
 
-.research-item iframe {
-  width: 100%;  /* Responsive width for video */
-  height: 315px;  /* Fixed height */
+.media-container img,
+.media-container video,
+.media-container iframe {
+  max-width: 100%;
+  border-radius: 8px;
+  display: block;
 }
 
-.research-item p {
+/* Project description */
+.research-item p,
+.project-item p {
   font-size: 1em;
-  color: #333;
+  margin-bottom: 0.6em;
+  color: var(--text);
+}
+
+/* Publication venue or conference */
+.research-item .venue,
+.project-item .venue {
+  font-style: italic;
+  color: var(--text-secondary);
   margin-bottom: 1em;
 }
 
-.research-item .paper-link {
+/* Container for links (GitHub, Paper, etc.) */
+.project-links {
+  display: flex;
+  gap: 1.2em;
+  flex-wrap: wrap;
+}
+
+/* Link button style */
+.btn-link {
   display: inline-block;
-  margin-top: 1em;
-  padding: 0.8em 1.5em;
-  background-color: #4CAF50;
-  color: white;
+  padding: 0.6em 1.3em;
+  background-color: var(--links);
+  color: #fff;
   text-decoration: none;
-  border-radius: 5px;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
 }
 
-.research-item .paper-link:hover {
-  background-color: #45a049;
+.btn-link:hover,
+.btn-link:focus {
+  background-color: #0056b3;
+  outline: none;
 }
 
-/* Optional: Responsive styling for smaller screens */
-@media (max-width: 768px) {
-  .research-item {
-    padding: 1em;  /* Reduce padding for small screens */
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .research-item,
+  .project-item {
+    padding: 1em 0;
+  }
+
+  .project-links {
+    justify-content: flex-start;
   }
 }
