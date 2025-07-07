@@ -2,7 +2,7 @@ title: Allen George Philip
 author: Allen George Philip
 url: https://axgeorge.github.io/ # root address of the site
 description: > # description of the site (multiple lines allowed)
-Portfolio website showcasing my research publications, projects, and more.
+  Portfolio website showcasing my research publications, projects, and more.
 
 permalink: /:slug
 
