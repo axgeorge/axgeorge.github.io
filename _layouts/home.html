@@ -2,7 +2,7 @@
 layout: default
 ---
 
-<header style="margin-bottom: 2em;">
+<header style="margin-bottom: 2em; background-color: var(--bg-secondary); padding: 2em 1em; border-bottom: 1px solid var(--border); box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
   {% if site.theme_config.show_navbar == true %}
     {% include horizontal_list.html collection=site.data.home.navbar_entries %}
     <div class="dashed"></div>
@@ -10,16 +10,16 @@ layout: default
 
   <div style="display: flex; align-items: center; justify-content: center; gap: 2em; flex-wrap: wrap;">
 
-    <!-- Profile Picture on the Left -->
+    <!-- Profile Picture -->
     <div>
       <img
         src="/assets/images/profilepic.jpeg"
         alt="Allen George Philip"
-        style="border-radius: 50%; width: 180px; height: 180px; object-fit: cover;"
+        style="border-radius: 50%; width: 220px; height: 220px; object-fit: cover;"
       />
     </div>
 
-    <!-- Text Content on the Right -->
+    <!-- Text and Icons -->
     <div style="text-align: left; max-width: 500px;">
       <h1 style="margin: 0;">{{ site.title }}</h1>
 
@@ -44,7 +44,6 @@ layout: default
       </div>
     </div>
   </div>
-</header>
 
 </header>
 
