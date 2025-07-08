@@ -102,13 +102,26 @@ h2 {
 }
 
 /* Media styles */
-.media-container img,
-.media-container video,
-.media-container iframe {
-  max-width: 100%;
+.media-container img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
   border-radius: 8px;
   display: block;
   flex: 1 1 30%;
+  object-fit: cover;
+  margin: 0 auto;
+}
+
+.media-container video,
+.media-container iframe {
+  width: 100%; /* Full width for wide content like videos */
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+  margin: 0 auto;
+  object-fit: contain;
 }
 
 /* Project description */
