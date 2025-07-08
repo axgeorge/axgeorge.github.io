@@ -138,9 +138,9 @@ other_project_entries:
       - "/assets/images/Map_1_0.01.jpeg"
       - "/assets/images/Map_3_0.1.JPG"
     desc: >
-      This project analyzes the performance of the ROS Gmapping SLAM package
-      under varying levels of simulated Lidar noise. By introducing different
-      noise profiles, we evaluate the impact on map accuracy and localization,
+      The performance of the ROS Gmapping SLAM package under varying levels
+      of simulated Lidar noise is analyzed. By introducing different
+      noise profiles, the impact on map accuracy and localization is evaluated,
       providing insights into the robustness of Gmapping in real-world
       scenarios with sensor imperfections.
     venue:
