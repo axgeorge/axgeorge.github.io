@@ -47,26 +47,30 @@ layout: default
 {{ content }}
 
 {% if site.theme_config.show_research == true %}
-  <h2 class="project-section-title">{{ site.theme_config.home.title_research }}</h2>
+  <h2 class="project-section-title" style="font-size: 2em; margin-top: 2em; margin-bottom: 0.5em;">{{ site.theme_config.home.title_research }}</h2>
 
   <div class="project-list research-list">
     {% for project in site.data.home.research_entries %}
       <div class="project-item research-item">
-        <h3>{{ project.title }}</h3>
+        <h3 style="font-size: 1.7em; margin-bottom: 0.5em;">{{ project.title }}</h3>
 
         {% if project.media_list %}
-          <div class="media-container">
+          <div class="media-container" style="display: flex; gap: 1em; flex-wrap: wrap;">
             {% for media_url in project.media_list %}
               {% assign media_lc = media_url | downcase %}
               {% if media_lc contains "youtube.com" or media_lc contains "youtu.be" %}
-                <iframe src="{{ media_url }}" frameborder="0" allowfullscreen></iframe>
+                <iframe src="{{ media_url }}" frameborder="0" allowfullscreen
+                  style="flex: 1 1 30%; max-width: 30%; border-radius: 8px; min-width: 200px; height: 170px;">
+                </iframe>
               {% elsif media_lc contains ".mp4" or media_lc contains ".webm" %}
-                <video controls>
+                <video controls
+                  style="flex: 1 1 30%; max-width: 30%; border-radius: 8px; min-width: 200px; height: 170px;">
                   <source src="{{ media_url }}" type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
               {% else %}
-                <img src="{{ media_url }}" alt="{{ project.title }} media" />
+                <img src="{{ media_url }}" alt="{{ project.title }} media"
+                  style="flex: 1 1 30%; max-width: 30%; border-radius: 8px; min-width: 200px; height: auto;" />
               {% endif %}
             {% endfor %}
           </div>
@@ -75,30 +79,31 @@ layout: default
           {% assign media_lc = media_url | downcase %}
           <div class="media-container">
             {% if media_lc contains "youtube.com" or media_lc contains "youtu.be" %}
-              <iframe src="{{ media_url }}" frameborder="0" allowfullscreen></iframe>
+              <iframe src="{{ media_url }}" frameborder="0" allowfullscreen
+                style="width: 100%; max-height: 360px; border-radius: 8px;"></iframe>
             {% elsif media_lc contains ".mp4" or media_lc contains ".webm" %}
-              <video controls>
+              <video controls style="width: 100%; max-height: 360px; border-radius: 8px;">
                 <source src="{{ media_url }}" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
             {% else %}
-              <img src="{{ media_url }}" alt="{{ project.title }} media" />
+              <img src="{{ media_url }}" alt="{{ project.title }} media" style="width: auto; max-width: 100%; border-radius: 8px;" />
             {% endif %}
           </div>
         {% endif %}
 
-        <p>{{ project.description }}</p>
+        <p style="font-size: 1em; margin-bottom: 0.4em; color: var(--text);">{{ project.description }}</p>
 
         {% if project.journal_conference %}
-          <p class="venue">{{ project.journal_conference }}</p>
+          <p class="venue" style="font-style: italic; color: var(--text-secondary); margin-bottom: 0.8em;">{{ project.journal_conference }}</p>
         {% endif %}
 
-        <div class="project-links">
+        <div class="project-links" style="display: flex; gap: 0.6em; flex-wrap: wrap;">
           {% if project.github_link %}
-            <a href="{{ project.github_link }}" target="_blank" class="btn-link">GitHub</a>
+            <a href="{{ project.github_link }}" target="_blank" class="btn-link" style="padding: 0.4em 0.9em; font-size: 0.85em;">GitHub</a>
           {% endif %}
           {% if project.paper_link %}
-            <a href="{{ project.paper_link }}" target="_blank" class="btn-link">Paper</a>
+            <a href="{{ project.paper_link }}" target="_blank" class="btn-link" style="padding: 0.4em 0.9em; font-size: 0.85em;">Paper</a>
           {% endif %}
         </div>
       </div>
@@ -107,26 +112,30 @@ layout: default
 {% endif %}
 
 {% if site.data.home.other_project_entries %}
-  <h2 class="project-section-title">Other Projects</h2>
+  <h2 class="project-section-title" style="font-size: 2em; margin-top: 2em; margin-bottom: 0.5em;">Other Projects</h2>
 
   <div class="project-list other-project-list">
     {% for project in site.data.home.other_project_entries %}
       <div class="project-item">
-        <h3>{{ project.title }}</h3>
+        <h3 style="font-size: 1.7em; margin-bottom: 0.5em;">{{ project.title }}</h3>
 
         {% if project.media_list %}
-          <div class="media-container">
+          <div class="media-container" style="display: flex; gap: 1em; flex-wrap: wrap;">
             {% for media_url in project.media_list %}
               {% assign media_lc = media_url | downcase %}
               {% if media_lc contains "youtube.com" or media_lc contains "youtu.be" %}
-                <iframe src="{{ media_url }}" frameborder="0" allowfullscreen></iframe>
+                <iframe src="{{ media_url }}" frameborder="0" allowfullscreen
+                  style="flex: 1 1 30%; max-width: 30%; border-radius: 8px; min-width: 200px; height: 170px;">
+                </iframe>
               {% elsif media_lc contains ".mp4" or media_lc contains ".webm" %}
-                <video controls>
+                <video controls
+                  style="flex: 1 1 30%; max-width: 30%; border-radius: 8px; min-width: 200px; height: 170px;">
                   <source src="{{ media_url }}" type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
               {% else %}
-                <img src="{{ media_url }}" alt="{{ project.title }} media" />
+                <img src="{{ media_url }}" alt="{{ project.title }} media"
+                  style="flex: 1 1 30%; max-width: 30%; border-radius: 8px; min-width: 200px; height: auto;" />
               {% endif %}
             {% endfor %}
           </div>
@@ -135,30 +144,31 @@ layout: default
           {% assign media_lc = media_url | downcase %}
           <div class="media-container">
             {% if media_lc contains "youtube.com" or media_lc contains "youtu.be" %}
-              <iframe src="{{ media_url }}" frameborder="0" allowfullscreen></iframe>
+              <iframe src="{{ media_url }}" frameborder="0" allowfullscreen
+                style="width: 100%; max-height: 360px; border-radius: 8px;"></iframe>
             {% elsif media_lc contains ".mp4" or media_lc contains ".webm" %}
-              <video controls>
+              <video controls style="width: 100%; max-height: 360px; border-radius: 8px;">
                 <source src="{{ media_url }}" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
             {% else %}
-              <img src="{{ media_url }}" alt="{{ project.title }} media" />
+              <img src="{{ media_url }}" alt="{{ project.title }} media" style="width: auto; max-width: 100%; border-radius: 8px;" />
             {% endif %}
           </div>
         {% endif %}
 
-        <p>{{ project.desc }}</p>
+        <p style="font-size: 1em; margin-bottom: 0.4em; color: var(--text);">{{ project.desc }}</p>
 
         {% if project.venue %}
-          <p class="venue">{{ project.venue }}</p>
+          <p class="venue" style="font-style: italic; color: var(--text-secondary); margin-bottom: 0.8em;">{{ project.venue }}</p>
         {% endif %}
 
-        <div class="project-links">
+        <div class="project-links" style="display: flex; gap: 0.6em; flex-wrap: wrap;">
           {% if project.github_link %}
-            <a href="{{ project.github_link }}" target="_blank" class="btn-link">GitHub</a>
+            <a href="{{ project.github_link }}" target="_blank" class="btn-link" style="padding: 0.4em 0.9em; font-size: 0.85em;">GitHub</a>
           {% endif %}
           {% if project.paper_url %}
-            <a href="{{ project.paper_url }}" target="_blank" class="btn-link">Paper</a>
+            <a href="{{ project.paper_url }}" target="_blank" class="btn-link" style="padding: 0.4em 0.9em; font-size: 0.85em;">Paper</a>
           {% endif %}
         </div>
       </div>
