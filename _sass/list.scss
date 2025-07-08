@@ -62,9 +62,10 @@ ul.horizontal-list {
 .project-list {
   display: flex;
   flex-direction: column;
-  gap: 1.5em;  /* Reduced vertical spacing between items */
+  gap: 1.2em;  /* Reduced spacing between projects */
   color: var(--text);
-  margin-top: 0;  /* Avoid top padding unless specifically needed */
+  margin-top: 0;
+  padding-top: 0;
 }
 
 /* Each project item */
@@ -74,23 +75,30 @@ ul.horizontal-list {
   padding: 0;
   box-shadow: none;
   width: 100%;
-  margin-bottom: 1.5em;  /* Reduced bottom spacing */
+  margin-bottom: 1em;  /* Tighter bottom space between projects */
+}
+
+/* Section headers (like Research Projects, Other Projects) */
+h2 {
+  margin-top: 1em;     /* Less top margin before heading */
+  margin-bottom: 0.6em; /* Less bottom margin before first project */
+  font-size: 2em;
 }
 
 /* Project titles */
 .research-item h3,
 .project-item h3 {
-  font-size: 1.7em;
-  margin-bottom: 0.5em;  /* Tighter spacing under title */
+  font-size: 1.6em;
+  margin-bottom: 0.4em;  /* Tighter space under title */
 }
 
-/* Container for media */
+/* Container for media (images, gifs, videos, iframes) */
 .media-container {
-  margin-bottom: 0.8em;  /* Slightly reduced */
+  margin-bottom: 0.5em;  /* Reduced space below media */
   max-width: 100%;
   display: flex;
   flex-wrap: wrap;
-  gap: 1em;
+  gap: 0.8em;
 }
 
 /* Media styles */
@@ -100,13 +108,14 @@ ul.horizontal-list {
   max-width: 100%;
   border-radius: 8px;
   display: block;
+  flex: 1 1 30%;
 }
 
 /* Project description */
 .research-item p,
 .project-item p {
   font-size: 1em;
-  margin-bottom: 0.4em;  /* Tighter spacing below text */
+  margin-bottom: 0.4em;
   color: var(--text);
 }
 
@@ -115,7 +124,7 @@ ul.horizontal-list {
 .project-item .venue {
   font-style: italic;
   color: var(--text-secondary);
-  margin-bottom: 0.8em;  /* Less vertical space */
+  margin-bottom: 0.6em;  /* Slightly reduced */
 }
 
 /* Link container (GitHub, Paper, etc.) */
@@ -123,6 +132,7 @@ ul.horizontal-list {
   display: flex;
   gap: 1em;
   flex-wrap: wrap;
+  margin-top: 0.2em;
 }
 
 /* Link button style */
@@ -147,10 +157,22 @@ ul.horizontal-list {
 @media (max-width: 600px) {
   .research-item,
   .project-item {
-    padding: 0.8em 0;
+    padding: 0.5em 0;
   }
 
   .project-links {
     justify-content: flex-start;
+  }
+
+  .media-container {
+    flex-direction: column;
+    gap: 0.5em;
+  }
+
+  .media-container img,
+  .media-container video,
+  .media-container iframe {
+    max-width: 100%;
+    flex: 1 1 100%;
   }
 }
