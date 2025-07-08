@@ -100,20 +100,52 @@ misc_entries:
 research_entries:
 
     # For research_entries or other_project_entries
-  - title: "Example Project"
+
+  - title: "C*: A new bounding approach for the moving-target traveling salesman problem"
     media: 
-    description: "Brief description here"
-    journal_conference: "Conference name or Journal"
+    description: "A new framework that provides optimality guarantees for moving-target traveling salesman problems with generic target trajectories."
+    journal_conference: "IEEE Transactions on Robotics (T-R0)"
     github_link: 
-    paper_link: 
+    paper_link: https://arxiv.org/pdf/2312.05499
+
+  - title: "A mixed-integer conic program for the moving-target traveling salesman problem based on a graph of convex sets"
+    media: 
+    description: "A new formulation that finds the optimum for moving-target traveling salesman problems with linear target trajectories."
+    journal_conference: "2024 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS 2024)"
+    github_link: 
+    paper_link: https://arxiv.org/pdf/2403.04917
+
+  - title: "A mixed-integer conic program for the multi-agent moving-target traveling salesman problem"
+    media: 
+    description: "A new formulation that finds the optimum for moving-target traveling salesman problems with multiple agents and piecewise-linear target trajectories."
+    journal_conference: "2025 IEEE 21st International Conference on Automation Science and Engineering (CASE 2025)"
+    github_link: 
+    paper_link: https://arxiv.org/pdf/2501.06130
 
 
 other_project_entries:
   
-  - title: "Other Project"
-    media: "https://link-to-media.gif"
-    desc: "Description"
-    venue: "Venue or conference"
-    github_link: "https://github.com/username/otherproject"
-    paper_url: "https://link-to-paper-or-project"
+  - title: "Multi-depot UAV routing"
+    media: "/assets/images/multi-depot-routing.png"
+    desc: "A heuristic solver that routes multiple UAVs to visit a set of target locations."
+    venue:
+    github_link: "https://github.com/axgeorge/multi-depot-uav-routing"
+    paper_url: 
+
+  - title: "Graph-labeling optimizer"
+    media: "/assets/images/graph-labeling.png"
+    desc: "A toolkit for solving and visualizing node labeling problems on trees."
+    venue: 
+    github_link: https://github.com/axgeorge/graph-labeling-optimizer
+    paper_url: 
+
+  - title: "Graph quest"
+    media_list:
+      - "/assets/images/astar.png"
+      - "/assets/images/kruskals.png"
+      - "/assets/images/eultours.png"
+    desc: "A toolkit for solving and visualizing node labeling problems on trees."
+    venue: 
+    github_link: https://github.com/axgeorge/graph-labeling-optimizer
+    paper_url: 
 
