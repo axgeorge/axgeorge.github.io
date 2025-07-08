@@ -89,7 +89,7 @@ h2 {
   margin-bottom: 0.25em; /* reduced to 0.25em */
 }
 
-/* Container for media */
+/* Common styles for all media in the container */
 .media-container {
   margin-bottom: 0.48em; /* keeping previous value */
   max-width: 100%;
@@ -98,13 +98,20 @@ h2 {
   gap: 0.6em;
 }
 
-/* Media elements */
+/* Media elements like images, iframes should have small size and centered */
 .media-container img,
-.media-container video,
 .media-container iframe {
   border-radius: 8px;
   display: block;
-  max-width: 400px;
+  max-width: 400px;  /* Limiting the max width for images and iframes */
+  height: auto;
+}
+
+/* Videos should take the full width */
+.media-container video {
+  border-radius: 8px;
+  display: block;
+  width: 100%; /* Video takes full width */
   height: auto;
 }
 
