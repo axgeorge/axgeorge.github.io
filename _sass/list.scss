@@ -57,38 +57,43 @@ ul.horizontal-list {
 }
 
 
-/* Container for research projects */
+/* Container for research and other projects */
 .research-list,
 .project-list {
   display: flex;
   flex-direction: column;
-  gap: 2.5em;
+  gap: 1.5em;  /* Reduced vertical spacing between items */
   color: var(--text);
+  margin-top: 0;  /* Avoid top padding unless specifically needed */
 }
 
 /* Each project item */
 .research-item,
 .project-item {
-  background-color: transparent; /* no background */
-  padding: 0;                    /* no padding */
-  box-shadow: none;              /* no shadow */
+  background-color: transparent;
+  padding: 0;
+  box-shadow: none;
   width: 100%;
-  margin-bottom: 2em;
+  margin-bottom: 1.5em;  /* Reduced bottom spacing */
 }
 
 /* Project titles */
 .research-item h3,
 .project-item h3 {
   font-size: 1.7em;
-  margin-bottom: 0.8em;
+  margin-bottom: 0.5em;  /* Tighter spacing under title */
 }
 
-/* Container for media (image/video/iframe) */
+/* Container for media */
 .media-container {
-  margin-bottom: 1em;
+  margin-bottom: 0.8em;  /* Slightly reduced */
   max-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
 }
 
+/* Media styles */
 .media-container img,
 .media-container video,
 .media-container iframe {
@@ -101,29 +106,29 @@ ul.horizontal-list {
 .research-item p,
 .project-item p {
   font-size: 1em;
-  margin-bottom: 0.6em;
+  margin-bottom: 0.4em;  /* Tighter spacing below text */
   color: var(--text);
 }
 
-/* Publication venue or conference */
+/* Venue / conference line */
 .research-item .venue,
 .project-item .venue {
   font-style: italic;
   color: var(--text-secondary);
-  margin-bottom: 1em;
+  margin-bottom: 0.8em;  /* Less vertical space */
 }
 
-/* Container for links (GitHub, Paper, etc.) */
+/* Link container (GitHub, Paper, etc.) */
 .project-links {
   display: flex;
-  gap: 1.2em;
+  gap: 1em;
   flex-wrap: wrap;
 }
 
 /* Link button style */
 .btn-link {
   display: inline-block;
-  padding: 0.6em 1.3em;
+  padding: 0.5em 1.1em;
   background-color: var(--links);
   color: #fff;
   text-decoration: none;
@@ -138,11 +143,11 @@ ul.horizontal-list {
   outline: none;
 }
 
-/* Responsive adjustments */
+/* Responsive tweaks */
 @media (max-width: 600px) {
   .research-item,
   .project-item {
-    padding: 1em 0;
+    padding: 0.8em 0;
   }
 
   .project-links {
