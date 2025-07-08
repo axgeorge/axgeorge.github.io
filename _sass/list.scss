@@ -57,19 +57,12 @@ ul.horizontal-list {
 }
 
 
-/* Titles for Research Project and Other Projects sections */
-.project-section-title {
-  font-size: 2em;
-  margin-top: 2em;
-  margin-bottom: 0.3em; /* halved spacing under the titles */
-}
-
 /* Container for research and other projects */
 .research-list,
 .project-list {
   display: flex;
   flex-direction: column;
-  gap: 0.9em;  /* ~60% of previous 1.5em gap */
+  gap: 0.36em;  /* 60% of previous 0.9em */
   color: var(--text);
   margin-top: 0;
 }
@@ -81,47 +74,45 @@ ul.horizontal-list {
   padding: 0;
   box-shadow: none;
   width: 100%;
-  margin-bottom: 0.9em;  /* ~60% of previous 1.5em */
+  margin-bottom: 0.36em;  /* 60% of previous 0.9em */
 }
 
 /* Project titles */
 .research-item h3,
 .project-item h3 {
-  font-size: 1.7em;
-  margin-bottom: 0.3em;  /* Tighter spacing under title */
+  font-size: 1.5em;
+  margin-bottom: 0.096em; /* 60% of previous 0.24em */
+}
+
+/* Titles for Research and Other projects sections */
+h2 {
+  margin-bottom: 0.96em; /* reduced by 60% from typical ~2.4em */
 }
 
 /* Container for media */
 .media-container {
-  margin-bottom: 0.5em;  /* Slightly reduced */
+  margin-bottom: 0.48em; /* keeping previous value */
   max-width: 100%;
   display: flex;
   flex-wrap: wrap;
   gap: 0.6em;
 }
 
-/* Media styles */
+/* Media elements */
 .media-container img,
 .media-container video,
 .media-container iframe {
-  max-width: 100%;
   border-radius: 8px;
   display: block;
-  flex: 1 1 30%;
-}
-
-/* Special handling for wide videos or iframes */
-.media-container video,
-.media-container iframe {
-  max-width: 100%;
-  flex: 1 1 100%;
+  max-width: 400px;
+  height: auto;
 }
 
 /* Project description */
 .research-item p,
 .project-item p {
-  font-size: 1em;
-  margin-bottom: 0.25em;  /* Tighter spacing below text */
+  font-size: 0.95em;
+  margin-bottom: 0.24em;
   color: var(--text);
 }
 
@@ -130,27 +121,28 @@ ul.horizontal-list {
 .project-item .venue {
   font-style: italic;
   color: var(--text-secondary);
-  margin-bottom: 0.5em;  /* Less vertical space */
+  margin-bottom: 0.48em;
 }
 
-/* Link container (GitHub, Paper, etc.) */
+/* Project links container */
 .project-links {
   display: flex;
   gap: 0.6em;
   flex-wrap: wrap;
 }
 
-/* Link button style */
+/* Much smaller link button style */
 .btn-link {
   display: inline-block;
-  padding: 0.3em 0.7em;  /* Significantly reduced padding */
+  padding: 0.25em 0.6em;
   background-color: var(--links);
   color: #fff;
   text-decoration: none;
-  border-radius: 6px;
+  border-radius: 4px;
+  font-size: 0.75em;
   font-weight: 600;
-  font-size: 0.85em;    /* Smaller font size */
   transition: background-color 0.3s ease;
+  white-space: nowrap;
 }
 
 .btn-link:hover,
@@ -159,14 +151,21 @@ ul.horizontal-list {
   outline: none;
 }
 
-/* Responsive tweaks */
+/* Mobile adjustments */
 @media (max-width: 600px) {
   .research-item,
   .project-item {
-    padding: 0.5em 0;
+    padding: 0.6em 0;
   }
 
   .project-links {
     justify-content: flex-start;
   }
+
+  .media-container img,
+  .media-container video,
+  .media-container iframe {
+    max-width: 100%;
+  }
 }
+
