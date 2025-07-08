@@ -62,10 +62,9 @@ ul.horizontal-list {
 .project-list {
   display: flex;
   flex-direction: column;
-  gap: 1.2em;  /* Reduced spacing between projects */
+  gap: 0.9em;  /* ~60% of previous 1.5em */
   color: var(--text);
   margin-top: 0;
-  padding-top: 0;
 }
 
 /* Each project item */
@@ -75,60 +74,40 @@ ul.horizontal-list {
   padding: 0;
   box-shadow: none;
   width: 100%;
-  margin-bottom: 1em;  /* Tighter bottom space between projects */
-}
-
-/* Section headers (like Research Projects, Other Projects) */
-h2 {
-  margin-top: 1em;     /* Less top margin before heading */
-  margin-bottom: 0.6em; /* Less bottom margin before first project */
-  font-size: 2em;
+  margin-bottom: 0.9em;  /* ~60% of previous 1.5em */
 }
 
 /* Project titles */
 .research-item h3,
 .project-item h3 {
-  font-size: 1.6em;
-  margin-bottom: 0.4em;  /* Tighter space under title */
+  font-size: 1.5em;
+  margin-bottom: 0.24em; /* ~60% of previous 0.4em */
 }
 
-/* Container for media (images, gifs, videos, iframes) */
+/* Container for media */
 .media-container {
-  margin-bottom: 0.5em;  /* Reduced space below media */
+  margin-bottom: 0.48em; /* ~60% of previous 0.8em */
   max-width: 100%;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.8em;
+  gap: 0.6em; /* ~60% of previous 1em */
 }
 
-/* Media styles */
-.media-container img {
-  width: 100%;
-  max-width: 400px;
-  height: auto;
-  border-radius: 8px;
-  display: block;
-  flex: 1 1 30%;
-  object-fit: cover;
-  margin: 0 auto;
-}
-
+/* Media elements */
+.media-container img,
 .media-container video,
 .media-container iframe {
-  width: 100%; /* Full width for wide content like videos */
-  max-width: 100%;
-  height: auto;
   border-radius: 8px;
   display: block;
-  margin: 0 auto;
-  object-fit: contain;
+  max-width: 400px;
+  height: auto;
 }
 
 /* Project description */
 .research-item p,
 .project-item p {
-  font-size: 1em;
-  margin-bottom: 0.4em;
+  font-size: 0.95em;
+  margin-bottom: 0.24em; /* ~60% of previous 0.4em */
   color: var(--text);
 }
 
@@ -137,27 +116,28 @@ h2 {
 .project-item .venue {
   font-style: italic;
   color: var(--text-secondary);
-  margin-bottom: 0.6em;  /* Slightly reduced */
+  margin-bottom: 0.48em; /* ~60% of previous 0.8em */
 }
 
-/* Link container (GitHub, Paper, etc.) */
+/* Project links container */
 .project-links {
   display: flex;
-  gap: 1em;
+  gap: 0.6em;  /* ~60% of previous 1em */
   flex-wrap: wrap;
-  margin-top: 0.2em;
 }
 
-/* Link button style */
+/* Much smaller link button style */
 .btn-link {
   display: inline-block;
-  padding: 0.5em 1.1em;
+  padding: 0.25em 0.6em;  /* Reduced padding */
   background-color: var(--links);
   color: #fff;
   text-decoration: none;
-  border-radius: 6px;
+  border-radius: 4px;
+  font-size: 0.75em;      /* Smaller font */
   font-weight: 600;
   transition: background-color 0.3s ease;
+  white-space: nowrap;
 }
 
 .btn-link:hover,
@@ -166,26 +146,20 @@ h2 {
   outline: none;
 }
 
-/* Responsive tweaks */
+/* Mobile adjustments */
 @media (max-width: 600px) {
   .research-item,
   .project-item {
-    padding: 0.5em 0;
+    padding: 0.6em 0;
   }
 
   .project-links {
     justify-content: flex-start;
   }
 
-  .media-container {
-    flex-direction: column;
-    gap: 0.5em;
-  }
-
   .media-container img,
   .media-container video,
   .media-container iframe {
     max-width: 100%;
-    flex: 1 1 100%;
   }
 }
