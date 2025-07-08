@@ -144,8 +144,8 @@ other_project_entries:
       - "/assets/images/astar.png"
       - "/assets/images/kruskals.png"
       - "/assets/images/eultours.png"
-    desc: "A toolkit for solving and visualizing node labeling problems on trees."
+    desc: "A visual journey through graph algorithms. Build your own graph instances in an interactive grid world. Visualize how classic algorithms like Kruskal’s, Dijkstra’s, A*, and Depth-First Search solve them in real time."
     venue: 
-    github_link: https://github.com/axgeorge/graph-labeling-optimizer
+    github_link: https://github.com/axgeorge/GraphQuest
     paper_url: 
 
