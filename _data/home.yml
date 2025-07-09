@@ -118,7 +118,7 @@ research_entries:
     paper_link: https://arxiv.org/pdf/2403.04917
 
   - title: "A Mixed-Integer Conic Program for the Multi-Agent Moving-Target Traveling Salesman Problem"
-    media: 
+    media: "/assets/videos/case25-5-agt-20-tar.mp4"
     description: "A new formulation that finds the optimum for moving-target traveling salesman problems with multiple agents and piecewise-linear target trajectories."
     journal_conference: "2025 IEEE 21st International Conference on Automation Science and Engineering (CASE 2025)"
     github_link: 
