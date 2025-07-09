@@ -1,7 +1,8 @@
-{% comment %} This will be your new include file {% endcomment %}
-{% comment %} This file will contain the logic for rendering various media types. {% endcomment %}
-{% comment %} It expects 'project' and 'media_url' (if a single media item) {% endcomment %}
-{% comment %} or 'project.media_list' (for multiple media items) to be passed. {% endcomment %}
+{% comment %}
+  This include file contains the logic for rendering various media types for projects.
+  It expects the 'project' object (which should contain either 'media_list' or 'media')
+  to be passed.
+{% endcomment %}
 
 {% if include.project.media_list %}
   {% assign video_extensions = ".mp4,.webm" | split: "," %}
@@ -34,7 +35,7 @@
     </div>
   {% endfor %}
 
-  {% comment %} Render non-videos in groups of 3 {% endcomment %}
+  {% comment %} Render non-videos (images, YouTube) in groups of 3 {% endcomment %}
   {% assign index = 0 %}
   {% assign total = non_videos | size %}
   {% for media in non_videos %}
@@ -44,33 +45,47 @@
     {% endif %}
 
     {% assign media_lc = media | downcase %}
-    {% if media_lc contains "youtube.com" or media_lc contains "youtu.be" %}
-      <iframe src="{{ media }}" frameborder="0" allowfullscreen style="flex: 1 1 30%; max-width: 30%; border-radius: 8px;"></iframe>
-    {% elsif media_lc contains ".jpg" or media_lc contains ".jpeg" or media_lc contains ".png" or media_lc contains ".gif" %}
+    {% if media_lc contains "youtube.com/embed/" or media_lc contains "youtube.com/watch?v=" %}
+      {% assign youtube_id = "" %}
+      {% if media_lc contains "youtube.com/embed/" %}
+        {% assign youtube_id = media_lc | split: "/embed/" | last | split: "?" | first %}
+      {% elsif media_lc contains "youtube.com/watch?v=" %}
+        {% assign youtube_id = media_lc | split: "watch?v=" | last | split: "&" | first %}
+      {% endif %}
+      <iframe src="https://www.youtube.com/embed/{{ youtube_id }}" frameborder="0" allowfullscreen style="flex: 1 1 30%; max-width: 30%; border-radius: 8px;"></iframe>
+    {% elsif media_lc contains ".jpg" or media_lc contains ".jpeg" or media_lc contains ".png" or media_lc contains ".gif" or media_lc contains ".webp" %}
       <img src="{{ media }}" alt="{{ include.project.title }} media" style="flex: 1 1 30%; max-width: 30%; border-radius: 8px;" />
     {% else %}
+      {% comment %} Fallback for other media types, assuming they are images if not video or YouTube {% endcomment %}
       <img src="{{ media }}" alt="{{ include.project.title }} media" style="flex: 1 1 30%; max-width: 30%; border-radius: 8px;" />
     {% endif %}
 
-    {% comment %} Close the row/container after 'chunk_size' items or if it's the last item {% endcomment %}
     {% assign index = index | plus: 1 %}
     {% assign remainder = index modulo chunk_size %}
     {% if remainder == 0 or forloop.last %}
       </div>
     {% endif %}
   {% endfor %}
-{% elsif include.project.media %} {# Handles single media if media_list is not present #}
+{% elsif include.project.media %}
+  {% comment %} Handles single media if 'media_list' is not present but 'media' (single item) is {% endcomment %}
   {% assign media_url = include.project.media %}
   {% assign media_lc = media_url | downcase %}
   <div class="media-container" style="display: flex; flex-direction: column;">
-    {% if media_lc contains "youtube.com" or media_lc contains "youtu.be" %}
-      <iframe src="{{ media_url }}" frameborder="0" allowfullscreen style="width: 100%; border-radius: 8px;"></iframe>
+    {% if media_lc contains "youtube.com/embed/" or media_lc contains "youtube.com/watch?v=" %}
+      {% assign youtube_id = "" %}
+      {% if media_lc contains "youtube.com/embed/" %}
+        {% assign youtube_id = media_lc | split: "/embed/" | last | split: "?" | first %}
+      {% elsif media_lc contains "youtube.com/watch?v=" %}
+        {% assign youtube_id = media_lc | split: "watch?v=" | last | split: "&" | first %}
+      {% endif %}
+      <iframe src="https://www.youtube.com/embed/{{ youtube_id }}" frameborder="0" allowfullscreen style="width: 100%; border-radius: 8px;"></iframe>
     {% elsif media_lc contains ".mp4" or media_lc contains ".webm" %}
       <video autoplay loop muted playsinline style="width: 100%; border-radius: 8px;">
         <source src="{{ media_url }}" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
     {% else %}
+      {% comment %} Fallback for other single media types, assuming image {% endcomment %}
       <img src="{{ media_url }}" alt="{{ include.project.title }} media" style="width: 100%; border-radius: 8px;" />
     {% endif %}
   </div>
