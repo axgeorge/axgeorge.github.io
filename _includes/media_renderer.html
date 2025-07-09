@@ -6,7 +6,7 @@
   It expects 'project' and 'media_url' (if a single media item)
   or 'project.media_list' (for multiple media items) to be passed.
 {% endcomment %}
-{% capture media_renderer_include %}
+
 {% if include.project.media_list %}
   {% assign video_extensions = ".mp4,.webm" | split: "," %}
   {% assign chunk_size = 3 %}
@@ -17,7 +17,7 @@
     {% assign media_lc = media_url | downcase %}
     {% assign is_video = false %}
     {% for ext in video_extensions %}
-      {% if media_lc ends_with ext %}
+      {% if media_lc | slice: -ext.size, ext.size == ext %} {# THIS IS THE CHANGE #}
         {% assign is_video = true %}
       {% endif %}
     {% endfor %}
@@ -77,4 +77,3 @@
     {% endif %}
   </div>
 {% endif %}
-{% endcapture %}
