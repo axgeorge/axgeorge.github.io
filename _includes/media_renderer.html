@@ -1,76 +1,84 @@
 {% comment %}
-  Renders media blocks for a project. Supports video, image, and YouTube URLs.
+  Renders media blocks for a project.
+  Supports relative or full URLs.
 {% endcomment %}
 
 {% if include.project.media_list %}
-  {% assign video_extensions = ".mp4,.webm" | split: "," %}
-  {% assign chunk_size = 3 %}
-  {% assign non_videos = "" | split: "," %}
+  {% assign video_extensions = "mp4,webm" | split: "," %}
   {% assign videos = "" | split: "," %}
+  {% assign non_videos = "" | split: "," %}
+  {% assign chunk_size = 3 %}
 
   {% for media_url in include.project.media_list %}
+    {% assign media_url = media_url | strip %}
     {% assign media_lc = media_url | downcase %}
-    {% assign is_video = false %}
-    {% for ext in video_extensions %}
-      {% if media_lc | slice: -ext.size, ext.size == ext %}
-        {% assign is_video = true %}
-      {% endif %}
-    {% endfor %}
-    {% if is_video %}
+    {% assign ext = media_lc | split: "." | last | split: "?" | first %}
+
+    {% if video_extensions contains ext %}
       {% assign videos = videos | push: media_url %}
     {% else %}
       {% assign non_videos = non_videos | push: media_url %}
     {% endif %}
   {% endfor %}
 
-  {% comment %} Render each video in its own row {% endcomment %}
+  {%- comment -%} Render video media vertically {%- endcomment -%}
   {% for video in videos %}
     <div class="media-container" style="display: flex; flex-direction: column; margin-bottom: 1em;">
       <video autoplay loop muted playsinline style="width: 100%; border-radius: 8px;">
-        <source src="{{ video }}" type="video/mp4" />
+        <source src="{{ video }}" type="video/{{ video | split: '.' | last | split: '?' | first }}">
         Your browser does not support the video tag.
       </video>
     </div>
   {% endfor %}
 
-  {% comment %} Render non-video media in rows of 3 {% endcomment %}
+  {%- comment -%} Render non-video media in rows of 3 {%- endcomment -%}
   {% for media in non_videos %}
-    {% if forloop.index0 modulo chunk_size == 0 %}
+    {% assign index0 = forloop.index0 %}
+    {% assign is_row_start = index0 modulo chunk_size == 0 %}
+    {% assign is_row_end = index0 modulo chunk_size == chunk_size - 1 or forloop.last %}
+
+    {% if is_row_start %}
       <div class="media-container" style="display: flex; gap: 1em; flex-wrap: wrap; margin-bottom: 1em;">
     {% endif %}
 
     {% assign media_lc = media | downcase %}
-    {% if media_lc contains "youtube.com/embed/" or media_lc contains "youtube.com/watch?v=" %}
+    {% assign is_youtube = media_lc contains "youtube.com/watch?v=" or media_lc contains "youtube.com/embed/" %}
+
+    {% if is_youtube %}
       {% assign youtube_id = "" %}
       {% if media_lc contains "youtube.com/embed/" %}
         {% assign youtube_id = media_lc | split: "/embed/" | last | split: "?" | first %}
       {% elsif media_lc contains "youtube.com/watch?v=" %}
         {% assign youtube_id = media_lc | split: "watch?v=" | last | split: "&" | first %}
       {% endif %}
-      <iframe src="https://www.youtube.com/embed/{{ youtube_id }}" frameborder="0" allowfullscreen style="flex: 1 1 30%; max-width: 30%; border-radius: 8px;"></iframe>
+      <iframe src="https://www.youtube.com/embed/{{ youtube_id }}" frameborder="0" allowfullscreen style="flex: 1 1 30%; max-width: 30%; aspect-ratio: 16/9; border-radius: 8px;"></iframe>
     {% else %}
       <img src="{{ media }}" alt="{{ include.project.title }} media" style="flex: 1 1 30%; max-width: 30%; border-radius: 8px;" />
     {% endif %}
 
-    {% if forloop.index0 modulo chunk_size == chunk_size - 1 or forloop.last %}
+    {% if is_row_end %}
       </div>
     {% endif %}
   {% endfor %}
+
 {% elsif include.project.media %}
-  {% assign media_url = include.project.media %}
+  {% assign media_url = include.project.media | strip %}
   {% assign media_lc = media_url | downcase %}
+  {% assign ext = media_lc | split: "." | last | split: "?" | first %}
+  {% assign is_youtube = media_lc contains "youtube.com/watch?v=" or media_lc contains "youtube.com/embed/" %}
+
   <div class="media-container" style="display: flex; flex-direction: column; margin-bottom: 1em;">
-    {% if media_lc contains "youtube.com/embed/" or media_lc contains "youtube.com/watch?v=" %}
+    {% if is_youtube %}
       {% assign youtube_id = "" %}
       {% if media_lc contains "youtube.com/embed/" %}
         {% assign youtube_id = media_lc | split: "/embed/" | last | split: "?" | first %}
       {% elsif media_lc contains "youtube.com/watch?v=" %}
         {% assign youtube_id = media_lc | split: "watch?v=" | last | split: "&" | first %}
       {% endif %}
-      <iframe src="https://www.youtube.com/embed/{{ youtube_id }}" frameborder="0" allowfullscreen style="width: 100%; border-radius: 8px;"></iframe>
-    {% elsif media_lc contains ".mp4" or media_lc contains ".webm" %}
+      <iframe src="https://www.youtube.com/embed/{{ youtube_id }}" frameborder="0" allowfullscreen style="width: 100%; aspect-ratio: 16/9; border-radius: 8px;"></iframe>
+    {% elsif ext == "mp4" or ext == "webm" %}
       <video autoplay loop muted playsinline style="width: 100%; border-radius: 8px;">
-        <source src="{{ media_url }}" type="video/mp4" />
+        <source src="{{ media_url }}" type="video/{{ ext }}">
         Your browser does not support the video tag.
       </video>
     {% else %}
@@ -78,3 +86,4 @@
     {% endif %}
   </div>
 {% endif %}
+
