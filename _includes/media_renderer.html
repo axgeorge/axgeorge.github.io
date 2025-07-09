@@ -1,6 +1,9 @@
 {% comment %}
   Renders media blocks for a project.
   Supports relative or full URLs.
+  Fixes:
+  - YouTube detection only triggers on full URLs starting with http/https.
+  - Non-video media display in rows of 3 columns using flexbox and calc width.
 {% endcomment %}
 
 {% if include.project.media_list %}
@@ -21,7 +24,7 @@
     {% endif %}
   {% endfor %}
 
-  {%- comment -%} Render video media vertically {%- endcomment -%}
+  {%- comment -%} Render videos stacked vertically {%- endcomment -%}
   {% for video in videos %}
     <div class="media-container" style="display: flex; flex-direction: column; margin-bottom: 1em;">
       <video autoplay loop muted playsinline style="width: 100%; border-radius: 8px;">
@@ -42,7 +45,11 @@
     {% endif %}
 
     {% assign media_lc = media | downcase %}
-    {% assign is_youtube = media_lc contains "youtube.com/watch?v=" or media_lc contains "youtube.com/embed/" %}
+    {% assign is_http = media_lc contains "http://" or media_lc contains "https://" %}
+    {% assign is_youtube = false %}
+    {% if is_http and (media_lc contains "youtube.com/watch?v=" or media_lc contains "youtube.com/embed/") %}
+      {% assign is_youtube = true %}
+    {% endif %}
 
     {% if is_youtube %}
       {% assign youtube_id = "" %}
@@ -51,9 +58,12 @@
       {% elsif media_lc contains "youtube.com/watch?v=" %}
         {% assign youtube_id = media_lc | split: "watch?v=" | last | split: "&" | first %}
       {% endif %}
-      <iframe src="https://www.youtube.com/embed/{{ youtube_id }}" frameborder="0" allowfullscreen style="flex: 1 1 30%; max-width: 30%; aspect-ratio: 16/9; border-radius: 8px;"></iframe>
+      <iframe src="https://www.youtube.com/embed/{{ youtube_id }}" frameborder="0" allowfullscreen
+              style="flex: 1 1 calc(33.333% - 1em); max-width: calc(33.333% - 1em); aspect-ratio: 16/9; border-radius: 8px;">
+      </iframe>
     {% else %}
-      <img src="{{ media }}" alt="{{ include.project.title }} media" style="flex: 1 1 30%; max-width: 30%; border-radius: 8px;" />
+      <img src="{{ media }}" alt="{{ include.project.title }} media"
+           style="width: calc(33.333% - 1em); margin-bottom: 1em; border-radius: 8px;" />
     {% endif %}
 
     {% if is_row_end %}
@@ -65,7 +75,11 @@
   {% assign media_url = include.project.media | strip %}
   {% assign media_lc = media_url | downcase %}
   {% assign ext = media_lc | split: "." | last | split: "?" | first %}
-  {% assign is_youtube = media_lc contains "youtube.com/watch?v=" or media_lc contains "youtube.com/embed/" %}
+  {% assign is_http = media_lc contains "http://" or media_lc contains "https://" %}
+  {% assign is_youtube = false %}
+  {% if is_http and (media_lc contains "youtube.com/watch?v=" or media_lc contains "youtube.com/embed/") %}
+    {% assign is_youtube = true %}
+  {% endif %}
 
   <div class="media-container" style="display: flex; flex-direction: column; margin-bottom: 1em;">
     {% if is_youtube %}
@@ -75,7 +89,8 @@
       {% elsif media_lc contains "youtube.com/watch?v=" %}
         {% assign youtube_id = media_lc | split: "watch?v=" | last | split: "&" | first %}
       {% endif %}
-      <iframe src="https://www.youtube.com/embed/{{ youtube_id }}" frameborder="0" allowfullscreen style="width: 100%; aspect-ratio: 16/9; border-radius: 8px;"></iframe>
+      <iframe src="https://www.youtube.com/embed/{{ youtube_id }}" frameborder="0" allowfullscreen
+              style="width: 100%; aspect-ratio: 16/9; border-radius: 8px;"></iframe>
     {% elsif ext == "mp4" or ext == "webm" %}
       <video autoplay loop muted playsinline style="width: 100%; border-radius: 8px;">
         <source src="{{ media_url }}" type="video/{{ ext }}">
@@ -86,4 +101,5 @@
     {% endif %}
   </div>
 {% endif %}
+
 
