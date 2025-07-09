@@ -1,9 +1,6 @@
 {% comment %}
-  Renders media blocks for a project.
-  Supports relative or full URLs.
-  Fixes:
-  - YouTube detection only triggers on full URLs starting with http/https.
-  - Non-video media display in rows of 3 columns using flexbox and calc width.
+  Media renderer with improved flexbox for non-video media (3 per row)
+  and smaller centered stacked videos.
 {% endcomment %}
 
 {% if include.project.media_list %}
@@ -24,24 +21,25 @@
     {% endif %}
   {% endfor %}
 
-  {%- comment -%} Render videos stacked vertically {%- endcomment -%}
+  {%- comment -%} Render videos stacked vertically, smaller and centered {%- endcomment -%}
   {% for video in videos %}
-    <div class="media-container" style="display: flex; flex-direction: column; margin-bottom: 1em;">
-      <video autoplay loop muted playsinline style="width: 100%; border-radius: 8px;">
+    <div class="media-container" style="display: flex; flex-direction: column; align-items: center; margin-bottom: 1em;">
+      <video autoplay loop muted playsinline
+             style="width: 50%; max-width: 600px; border-radius: 8px; display: block;">
         <source src="{{ video }}" type="video/{{ video | split: '.' | last | split: '?' | first }}">
         Your browser does not support the video tag.
       </video>
     </div>
   {% endfor %}
 
-  {%- comment -%} Render non-video media in rows of 3 {%- endcomment -%}
+  {%- comment -%} Render non-video media in rows of 3 horizontally {%- endcomment -%}
   {% for media in non_videos %}
     {% assign index0 = forloop.index0 %}
     {% assign is_row_start = index0 modulo chunk_size == 0 %}
     {% assign is_row_end = index0 modulo chunk_size == chunk_size - 1 or forloop.last %}
 
     {% if is_row_start %}
-      <div class="media-container" style="display: flex; gap: 1em; flex-wrap: wrap; margin-bottom: 1em;">
+      <div class="media-container" style="display: flex; flex-wrap: wrap; gap: 1em; margin-bottom: 1em;">
     {% endif %}
 
     {% assign media_lc = media | downcase %}
@@ -59,11 +57,11 @@
         {% assign youtube_id = media_lc | split: "watch?v=" | last | split: "&" | first %}
       {% endif %}
       <iframe src="https://www.youtube.com/embed/{{ youtube_id }}" frameborder="0" allowfullscreen
-              style="flex: 1 1 calc(33.333% - 1em); max-width: calc(33.333% - 1em); aspect-ratio: 16/9; border-radius: 8px;">
+              style="flex: 0 0 calc(33.333% - 1em); max-width: calc(33.333% - 1em); aspect-ratio: 16/9; border-radius: 8px;">
       </iframe>
     {% else %}
       <img src="{{ media }}" alt="{{ include.project.title }} media"
-           style="width: calc(33.333% - 1em); margin-bottom: 1em; border-radius: 8px;" />
+           style="flex: 0 0 calc(33.333% - 1em); max-width: calc(33.333% - 1em); border-radius: 8px; margin-bottom: 1em;" />
     {% endif %}
 
     {% if is_row_end %}
@@ -101,5 +99,3 @@
     {% endif %}
   </div>
 {% endif %}
-
-
