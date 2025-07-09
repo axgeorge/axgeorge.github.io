@@ -1,11 +1,7 @@
-{{ content }}
-
-{% comment %}
-  media_renderer.html (This will be your new include file)
-  This file will contain the logic for rendering various media types.
-  It expects 'project' and 'media_url' (if a single media item)
-  or 'project.media_list' (for multiple media items) to be passed.
-{% endcomment %}
+{% comment %} This will be your new include file {% endcomment %}
+{% comment %} This file will contain the logic for rendering various media types. {% endcomment %}
+{% comment %} It expects 'project' and 'media_url' (if a single media item) {% endcomment %}
+{% comment %} or 'project.media_list' (for multiple media items) to be passed. {% endcomment %}
 
 {% if include.project.media_list %}
   {% assign video_extensions = ".mp4,.webm" | split: "," %}
@@ -17,7 +13,7 @@
     {% assign media_lc = media_url | downcase %}
     {% assign is_video = false %}
     {% for ext in video_extensions %}
-      {% if media_lc | slice: -ext.size, ext.size == ext %} {# THIS IS THE CHANGE #}
+      {% if media_lc | slice: -ext.size, ext.size == ext %}
         {% assign is_video = true %}
       {% endif %}
     {% endfor %}
@@ -28,7 +24,7 @@
     {% endif %}
   {% endfor %}
 
-  {# Render videos one per row #}
+  {% comment %} Render videos one per row {% endcomment %}
   {% for video in videos %}
     <div class="media-container" style="display: flex; flex-direction: column;">
       <video autoplay loop muted playsinline style="width: 100%; border-radius: 8px;">
@@ -38,10 +34,11 @@
     </div>
   {% endfor %}
 
-  {# Render non-videos in groups of 3 #}
+  {% comment %} Render non-videos in groups of 3 {% endcomment %}
   {% assign index = 0 %}
   {% assign total = non_videos | size %}
   {% for media in non_videos %}
+    {% comment %} Open a new row/container for every 'chunk_size' items {% endcomment %}
     {% if forloop.index0 modulo chunk_size == 0 %}
       <div class="media-container" style="display: flex; gap: 1em; flex-wrap: wrap;">
     {% endif %}
@@ -55,6 +52,7 @@
       <img src="{{ media }}" alt="{{ include.project.title }} media" style="flex: 1 1 30%; max-width: 30%; border-radius: 8px;" />
     {% endif %}
 
+    {% comment %} Close the row/container after 'chunk_size' items or if it's the last item {% endcomment %}
     {% assign index = index | plus: 1 %}
     {% assign remainder = index modulo chunk_size %}
     {% if remainder == 0 or forloop.last %}
