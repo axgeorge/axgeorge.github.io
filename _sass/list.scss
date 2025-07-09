@@ -176,54 +176,69 @@ h2 {
   }
 }
 
-/* --- Videos --- */
+/* ---------- VIDEO STYLES ---------- */
 
 .media-container.video-row {
   display: flex;
   flex-direction: column;
-  align-items: center; /* center horizontally */
+  align-items: center;
   margin-bottom: 1em;
 }
 
-.media-container.video-row.single-video video.video-item {
+.media-container.single-video video.video-item {
   width: 100%;
   max-width: none;
   height: auto;
   border-radius: 8px;
-  display: block;
 }
 
-.media-container.video-row.multiple-videos video.video-item {
+.media-container.multiple-videos video.video-item {
   width: 80%;
   max-width: 800px;
   height: auto;
   border-radius: 8px;
-  display: block;
 }
 
-/* --- Non-video media: rows of 3 --- */
 
-.media-container.non-video-row {
+/* ---------- NON-VIDEO FLEX GRID ---------- */
+
+.media-container.non-video-flex {
   display: flex;
   flex-wrap: wrap;
-  gap: 1em;
+  gap: 0.75em;
   margin-bottom: 1em;
+  justify-content: flex-start;
 }
 
-.media-container.non-video-row .non-video-item {
-  flex: 0 0 calc(33.333% - 1em);
-  max-width: calc(33.333% - 1em);
+.non-video-item {
   border-radius: 8px;
-  box-sizing: border-box;
-  margin-bottom: 1em;
-  display: block;
   height: auto;
+  display: block;
+  box-sizing: border-box;
 }
 
-/* Maintain existing styles for images and iframes in mobile */
+/* Default to full width if only 1 media */
+.media-1-1 .non-video-item {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+/* 2 items: 50% width each */
+.media-1-2 .non-video-item {
+  flex: 0 0 calc(50% - 0.75em);
+  max-width: calc(50% - 0.75em);
+}
+
+/* 3+ items: 33.33% width each */
+.media-1-3 .non-video-item {
+  flex: 0 0 calc(33.333% - 0.75em);
+  max-width: calc(33.333% - 0.75em);
+}
+
+/* Mobile: always stack vertically */
 @media (max-width: 600px) {
-  .media-container.non-video-row .non-video-item {
-    flex: 0 0 100%;
-    max-width: 100%;
+  .non-video-item {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
   }
 }
