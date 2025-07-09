@@ -199,8 +199,7 @@ h2 {
   border-radius: 8px;
 }
 
-
-/* ---------- NON-VIDEO FLEX GRID ---------- */
+/* ---------- NON-VIDEO FLEX GRID (media_list) ---------- */
 
 .media-container.non-video-flex {
   display: flex;
@@ -217,28 +216,45 @@ h2 {
   box-sizing: border-box;
 }
 
-/* Default to full width if only 1 media */
+/* 1 image: full width */
 .media-1-1 .non-video-item {
   flex: 0 0 100%;
   max-width: 100%;
 }
 
-/* 2 items: 50% width each */
+/* 2 images: half width each */
 .media-1-2 .non-video-item {
   flex: 0 0 calc(50% - 0.75em);
   max-width: calc(50% - 0.75em);
 }
 
-/* 3+ items: 33.33% width each */
+/* 3+ images: one-third width each */
 .media-1-3 .non-video-item {
   flex: 0 0 calc(33.333% - 0.75em);
   max-width: calc(33.333% - 0.75em);
 }
 
-/* Mobile: always stack vertically */
+/* Responsive stacking on small screens */
 @media (max-width: 600px) {
   .non-video-item {
     flex: 0 0 100% !important;
     max-width: 100% !important;
   }
+}
+
+
+/* ---------- SINGLE IMAGE ONLY (project.media) ---------- */
+
+.media-container.single-image {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1em;
+}
+
+.single-non-video {
+  max-width: 50%;
+  width: 100%;
+  border-radius: 8px;
+  height: auto;
+  display: block;
 }
