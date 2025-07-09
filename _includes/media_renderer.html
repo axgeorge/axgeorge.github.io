@@ -1,6 +1,5 @@
 {% comment %}
-  Media renderer with improved flexbox for non-video media (3 per row)
-  and smaller centered stacked videos.
+  Media renderer with conditional video sizing and 3-col non-video layout
 {% endcomment %}
 
 {% if include.project.media_list %}
@@ -21,25 +20,31 @@
     {% endif %}
   {% endfor %}
 
-  {%- comment -%} Render videos stacked vertically, smaller and centered {%- endcomment -%}
+  {% comment %}
+    Video container classes depend on number of videos
+  {% endcomment %}
+  {% assign video_container_class = "video-row single-video" %}
+  {% if videos.size > 1 %}
+    {% assign video_container_class = "video-row multiple-videos" %}
+  {% endif %}
+
   {% for video in videos %}
-    <div class="media-container" style="display: flex; flex-direction: column; align-items: center; margin-bottom: 1em;">
-      <video autoplay loop muted playsinline
-             style="width: 50%; max-width: 600px; border-radius: 8px; display: block;">
+    <div class="media-container {{ video_container_class }}">
+      <video autoplay loop muted playsinline class="video-item">
         <source src="{{ video }}" type="video/{{ video | split: '.' | last | split: '?' | first }}">
         Your browser does not support the video tag.
       </video>
     </div>
   {% endfor %}
 
-  {%- comment -%} Render non-video media in rows of 3 horizontally {%- endcomment -%}
+  {% comment %} Non-video media in rows of 3 {% endcomment %}
   {% for media in non_videos %}
     {% assign index0 = forloop.index0 %}
     {% assign is_row_start = index0 modulo chunk_size == 0 %}
     {% assign is_row_end = index0 modulo chunk_size == chunk_size - 1 or forloop.last %}
 
     {% if is_row_start %}
-      <div class="media-container" style="display: flex; flex-wrap: wrap; gap: 1em; margin-bottom: 1em;">
+      <div class="media-container non-video-row">
     {% endif %}
 
     {% assign media_lc = media | downcase %}
@@ -57,11 +62,10 @@
         {% assign youtube_id = media_lc | split: "watch?v=" | last | split: "&" | first %}
       {% endif %}
       <iframe src="https://www.youtube.com/embed/{{ youtube_id }}" frameborder="0" allowfullscreen
-              style="flex: 0 0 calc(33.333% - 1em); max-width: calc(33.333% - 1em); aspect-ratio: 16/9; border-radius: 8px;">
+              class="non-video-item" style="aspect-ratio: 16/9; border-radius: 8px;">
       </iframe>
     {% else %}
-      <img src="{{ media }}" alt="{{ include.project.title }} media"
-           style="flex: 0 0 calc(33.333% - 1em); max-width: calc(33.333% - 1em); border-radius: 8px; margin-bottom: 1em;" />
+      <img src="{{ media }}" alt="{{ include.project.title }} media" class="non-video-item" />
     {% endif %}
 
     {% if is_row_end %}
@@ -79,7 +83,7 @@
     {% assign is_youtube = true %}
   {% endif %}
 
-  <div class="media-container" style="display: flex; flex-direction: column; margin-bottom: 1em;">
+  <div class="media-container video-row single-video">
     {% if is_youtube %}
       {% assign youtube_id = "" %}
       {% if media_lc contains "youtube.com/embed/" %}
@@ -90,7 +94,7 @@
       <iframe src="https://www.youtube.com/embed/{{ youtube_id }}" frameborder="0" allowfullscreen
               style="width: 100%; aspect-ratio: 16/9; border-radius: 8px;"></iframe>
     {% elsif ext == "mp4" or ext == "webm" %}
-      <video autoplay loop muted playsinline style="width: 100%; border-radius: 8px;">
+      <video autoplay loop muted playsinline class="video-item">
         <source src="{{ media_url }}" type="video/{{ ext }}">
         Your browser does not support the video tag.
       </video>
