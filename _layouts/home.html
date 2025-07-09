@@ -46,6 +46,12 @@ layout: default
 
 {{ content }}
 
+{% comment %}
+  Use the include in your main HTML structure.
+  Make sure to create a file named `_includes/media_renderer.html`
+  and paste the content of the `media_renderer_include` block into it.
+{% endcomment %}
+
 {% if site.theme_config.show_research == true %}
   <h2 style="font-size: 2em; margin-top: 2em;">{{ site.theme_config.home.title_research }}</h2>
 
@@ -54,42 +60,7 @@ layout: default
       <div class="project-item">
         <h3>{{ project.title }}</h3>
 
-        {% if project.media_list %}
-          <div class="media-container" style="display: flex; gap: 1em; flex-wrap: wrap;">
-            {% for media_url in project.media_list %}
-              {% assign media_lc = media_url | downcase %}
-              {% if media_lc contains "youtube.com" or media_lc contains "youtu.be" %}
-                <iframe src="{{ media_url }}" frameborder="0" allowfullscreen style="flex: 1 1 30%; max-width: 30%; border-radius: 8px;"></iframe>
-              {% elsif media_lc contains ".mp4" or media_lc contains ".webm" %}
-                <video autoplay loop muted playsinline style="flex: 1 1 30%; max-width: 30%; border-radius: 8px;">
-                  <source src="{{ media_url }}" type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-              {% else %}
-                <img src="{{ media_url }}" alt="{{ project.title }} media" style="flex: 1 1 30%; max-width: 30%; border-radius: 8px;" />
-              {% endif %}
-            {% endfor %}
-          </div>
-        {% elsif project.media %}
-          {% assign media_url = project.media %}
-          {% assign media_lc = media_url | downcase %}
-          {% if media_lc contains "youtube.com" or media_lc contains "youtu.be" %}
-            <div class="media-container">
-              <iframe src="{{ media_url }}" frameborder="0" allowfullscreen></iframe>
-            </div>
-          {% elsif media_lc contains ".mp4" or media_lc contains ".webm" %}
-            <div class="media-container">
-              <video autoplay loop muted playsinline style="width: 100%; border-radius: 8px;">
-                <source src="{{ media_url }}" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-            </div>
-          {% else %}
-            <div class="media-container">
-              <img src="{{ media_url }}" alt="{{ project.title }} media" />
-            </div>
-          {% endif %}
-        {% endif %}
+        {% include media_renderer.html project=project %}
 
         <p>{{ project.description }}</p>
 
@@ -118,42 +89,7 @@ layout: default
       <div class="project-item">
         <h3>{{ project.title }}</h3>
 
-        {% if project.media_list %}
-          <div class="media-container" style="display: flex; gap: 1em; flex-wrap: wrap;">
-            {% for media_url in project.media_list %}
-              {% assign media_lc = media_url | downcase %}
-              {% if media_lc contains "youtube.com" or media_lc contains "youtu.be" %}
-                <iframe src="{{ media_url }}" frameborder="0" allowfullscreen style="flex: 1 1 30%; max-width: 30%; border-radius: 8px;"></iframe>
-              {% elsif media_lc contains ".mp4" or media_lc contains ".webm" %}
-                <video autoplay loop muted playsinline style="flex: 1 1 30%; max-width: 30%; border-radius: 8px;">
-                  <source src="{{ media_url }}" type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-              {% else %}
-                <img src="{{ media_url }}" alt="{{ project.title }} media" style="flex: 1 1 30%; max-width: 30%; border-radius: 8px;" />
-              {% endif %}
-            {% endfor %}
-          </div>
-        {% elsif project.media %}
-          {% assign media_url = project.media %}
-          {% assign media_lc = media_url | downcase %}
-          {% if media_lc contains "youtube.com" or media_lc contains "youtu.be" %}
-            <div class="media-container">
-              <iframe src="{{ media_url }}" frameborder="0" allowfullscreen></iframe>
-            </div>
-          {% elsif media_lc contains ".mp4" or media_lc contains ".webm" %}
-            <div class="media-container">
-              <video autoplay loop muted playsinline style="width: 100%; border-radius: 8px;">
-                <source src="{{ media_url }}" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-            </div>
-          {% else %}
-            <div class="media-container">
-              <img src="{{ media_url }}" alt="{{ project.title }} media" />
-            </div>
-          {% endif %}
-        {% endif %}
+        {% include media_renderer.html project=project %}
 
         <p>{{ project.desc }}</p>
 
