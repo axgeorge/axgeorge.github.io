@@ -102,14 +102,16 @@ research_entries:
     # For research_entries or other_project_entries
 
   - title: "C*: A New Bounding Approach for the Moving-Target Traveling Salesman Problem"
-    media: 
+    media: "/assets/videos/tro-cstar-pwl.mp4"
     description: "A new framework that provides optimality guarantees for moving-target traveling salesman problems with generic target trajectories."
     journal_conference: "IEEE Transactions on Robotics (T-R0)"
     github_link: 
     paper_link: https://arxiv.org/pdf/2312.05499
 
   - title: "A Mixed-Integer Conic Program for the Moving-Target Traveling Salesman Problem based on a Graph of Convex Sets"
-    media: 
+    media_list:
+    - "/assets/videos/iros24-arm-conveyor.mp4"
+    - "/assets/videos/iros24-15-tar.mp4"
     description: "A new formulation that finds the optimum for moving-target traveling salesman problems with linear target trajectories."
     journal_conference: "2024 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS 2024)"
     github_link: 
