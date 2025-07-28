@@ -256,9 +256,9 @@ h2 {
 
 .media-1-3 .non-video-item,
 .media-1-3 .gif-container {
-  flex: 0 0 100%; /* Approximate gap per item */
-  max-width: 100%;
-  min-width: 100%;
+  flex: 0 0 50%; /* Approximate gap per item */
+  max-width: 50%;
+  min-width: 50%;
 }
 
 /* Ensure images inside non-video items fill their container */
