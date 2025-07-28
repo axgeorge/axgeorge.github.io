@@ -98,14 +98,14 @@ h2 {
   gap: 0.6em;
 }
 
-/* Media elements like images, iframes should have small size and centered */
-.media-container img,
-.media-container iframe {
-  border-radius: 8px;
-  display: block;
-  max-width: 400px;  /* Limiting the max width for images and iframes */
-  height: auto;
-}
+// /* Media elements like images, iframes should have small size and centered */
+// .media-container img,
+// .media-container iframe {
+//   border-radius: 8px;
+//   display: block;
+//   max-width: 400px;  /* Limiting the max width for images and iframes */
+//   height: auto;
+// }
 
 /* Videos should take the full width */
 .media-container video {
@@ -201,6 +201,7 @@ h2 {
 
 /* ---------- NON-VIDEO FLEX GRID (media_list) ---------- */
 
+/*
 .media-container.non-video-flex {
   display: flex;
   flex-wrap: wrap;
@@ -208,6 +209,7 @@ h2 {
   margin-bottom: 1em;
   justify-content: center;
 }
+*/
 
 /*
 .non-video-item {
@@ -270,67 +272,82 @@ h2 {
 }
 */
 
-/* ---------- LABELS FOR GIFs AND VIDEOS ---------- */
+/* ---------- GIF + MEDIA CONTAINER FIXES (Step 2 + Step 3) ---------- */
 
-/*
-.gif-label,
-.video-label {
-  position: absolute;
-  bottom: 6px;
-  left: 6px;
-  background-color: rgba(0, 0, 0, 0.7);
-  color: white;
-  font-size: 0.75em;
-  padding: 2px 6px;
-  border-radius: 4px;
-  pointer-events: none;
-}
-*/
-
-/* Ensure GIF/image containers get flex width styling */
-.media-1-2 .gif-container,
-.media-1-3 .gif-container {
-  flex: 0 0 calc(50% - 0.75em); /* default fallback */
-  max-width: calc(50% - 0.75em);
-}
-
-/* Specifically for 3+ items: 1/3 width */
-.media-1-3 .gif-container {
-  flex: 0 0 calc(33.333% - 0.75em);
-  max-width: calc(33.333% - 0.75em);
-}
-
-/* Style the container */
+/* Base gif container setup */
 .gif-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  position: relative; /* optional, if you want relative positioning context */
-}
-
-/* Remove absolute positioning to place label below */
-.gif-label,
-.video-label {
-  position: static; /* or just remove this property */
-  margin-top: 0.4em; /* space between media and label */
-  background-color: rgba(0, 0, 0, 0.7);
-  color: white;
-  font-size: 0.75em;
-  padding: 2px 6px;
-  border-radius: 4px;
-  pointer-events: none;
-  /* optional: add max-width and word-wrap */
+  position: relative;
+  flex: 1 1 auto;
   max-width: 100%;
-  word-wrap: break-word;
+  box-sizing: border-box;
 }
 
+/* Shared media styles for images, gifs, iframes */
+.non-video-item,
 .gif-container img,
-.gif-container video,
 .gif-container iframe {
   width: 100%;
   max-width: 100%;
   height: auto;
   display: block;
   border-radius: 8px;
+  box-sizing: border-box;
+}
+
+/* Label styling (placed below the media) */
+.gif-label,
+.video-label {
+  position: static;
+  margin-top: 0.4em;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  font-size: 0.75em;
+  padding: 2px 6px;
+  border-radius: 4px;
+  pointer-events: none;
+  max-width: 100%;
+  word-wrap: break-word;
+}
+
+/* Flex grid layout for 1, 2, or 3 items */
+.media-1-1 .non-video-item,
+.media-1-1 .gif-container {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+.media-1-2 .non-video-item,
+.media-1-2 .gif-container {
+  flex: 0 0 calc(50% - 0.75em);
+  max-width: calc(50% - 0.75em);
+}
+
+.media-1-3 .non-video-item,
+.media-1-3 .gif-container {
+  flex: 0 0 calc(33.333% - 0.75em);
+  max-width: calc(33.333% - 0.75em);
+}
+
+/* Container for media grid layout */
+.media-container.non-video-flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75em;
+  margin-bottom: 1em;
+  justify-content: space-between; /* more natural spacing */
+}
+
+/* Responsive fallback for small screens */
+@media (max-width: 600px) {
+  .non-video-item,
+  .gif-container,
+  .gif-container img,
+  .gif-container iframe {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
 }
