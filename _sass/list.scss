@@ -195,7 +195,7 @@ h2 {
   flex-wrap: wrap;
   gap: 0.75em;
   margin-bottom: 1em;
-  justify-content: space-between; /* Adjust spacing here if needed */
+  justify-content: flex-start;
 }
 
 /* Shared styles for images, GIF containers, and iframes */
@@ -266,6 +266,31 @@ h2 {
     max-width: 100% !important;
   }
 }
+
+/* Fix for gif/video labels on small screens */
+@media (max-width: 600px) {
+  .gif-label,
+  .video-label {
+    position: static !important;
+    margin-top: 0.5em;
+    display: block;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 2px 6px;
+    border-radius: 4px;
+    word-wrap: break-word;
+    box-sizing: border-box;
+    z-index: 1;
+  }
+
+  /* Add bottom padding to containers so labels have space */
+  .gif-container,
+  .non-video-item {
+    padding-bottom: 1.5em;
+  }
+}
+
 
 /* ---------- SINGLE IMAGE ONLY (project.media) ---------- */
 
