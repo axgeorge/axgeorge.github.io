@@ -325,3 +325,12 @@ h2 {
   word-wrap: break-word;
 }
 
+.gif-container img,
+.gif-container video,
+.gif-container iframe {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
