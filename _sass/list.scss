@@ -1,20 +1,19 @@
 ul.horizontal-list {
   display: flex;
-  //justify-content: space-between;
-  margin-top: 0em;
+  /* justify-content: space-between; */ /* Uncomment if needed */
+  margin-top: 0;
   margin-left: -40px;
   flex-wrap: wrap;
 
   li {
-    display:inline;
+    display: inline;
     margin-right: 1em;
   }
 
   li a {
     text-decoration: none;
-    font-weight: normal
+    font-weight: normal;
   }
-
 }
 
 .card {
@@ -40,7 +39,6 @@ ul.horizontal-list {
   hr {
     margin: 0.5em 0;
   }
-
 }
 
 /* Responsive cards - one column layout on small screens */
@@ -50,19 +48,19 @@ ul.horizontal-list {
     display: block;
     margin-bottom: 1em;
     margin-left: 1em;
-    a, .header {
+    a,
+    .header {
       font-size: 1em;
     }
   }
 }
-
 
 /* Container for research and other projects */
 .research-list,
 .project-list {
   display: flex;
   flex-direction: column;
-  gap: 0.36em;  /* 60% of previous 0.9em */
+  gap: 0.36em; /* 60% of previous 0.9em */
   color: var(--text);
   margin-top: 0;
 }
@@ -74,7 +72,7 @@ ul.horizontal-list {
   padding: 0;
   box-shadow: none;
   width: 100%;
-  margin-bottom: 0.36em;  /* 60% of previous 0.9em */
+  margin-bottom: 0.36em; /* 60% of previous 0.9em */
 }
 
 /* Project titles */
@@ -91,21 +89,12 @@ h2 {
 
 /* Common styles for all media in the container */
 .media-container {
-  margin-bottom: 0.48em; /* keeping previous value */
+  margin-bottom: 0.48em;
   max-width: 100%;
   display: flex;
   flex-wrap: wrap;
   gap: 0.6em;
 }
-
-// /* Media elements like images, iframes should have small size and centered */
-// .media-container img,
-// .media-container iframe {
-//   border-radius: 8px;
-//   display: block;
-//   max-width: 400px;  /* Limiting the max width for images and iframes */
-//   height: auto;
-// }
 
 /* Videos should take the full width */
 .media-container video {
@@ -138,7 +127,7 @@ h2 {
   flex-wrap: wrap;
 }
 
-/* Much smaller link button style */
+/* Smaller link button style */
 .btn-link {
   display: inline-block;
   padding: 0.25em 0.6em;
@@ -201,80 +190,26 @@ h2 {
 
 /* ---------- NON-VIDEO FLEX GRID (media_list) ---------- */
 
-/*
 .media-container.non-video-flex {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75em;
   margin-bottom: 1em;
-  justify-content: center;
+  justify-content: space-between; /* Adjust spacing here if needed */
 }
-*/
 
-/*
-.non-video-item {
+/* Shared styles for images, GIF containers, and iframes */
+.non-video-item,
+.gif-container {
   border-radius: 8px;
   height: auto;
   display: block;
   box-sizing: border-box;
-}
-*/
-
-/* 1 image: full width */
-.media-1-1 .non-video-item {
-  flex: 0 0 100%;
-  max-width: 100%;
-}
-
-/* 2 images: half width each */
-.media-1-2 .non-video-item {
-  flex: 0 0 calc(50% - 0.75em);
-  max-width: calc(50% - 0.75em);
-}
-
-/* 3+ images: one-third width each */
-.media-1-3 .non-video-item {
-  flex: 0 0 calc(33.333% - 0.75em);
-  max-width: calc(33.333% - 0.75em);
-}
-
-/* Responsive stacking on small screens */
-@media (max-width: 600px) {
-  .non-video-item {
-    flex: 0 0 100% !important;
-    max-width: 100% !important;
-  }
-}
-
-
-/* ---------- SINGLE IMAGE ONLY (project.media) ---------- */
-
-.media-container.single-image {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 1em;
-}
-
-.single-non-video {
-  max-width: 50%;
   width: 100%;
-  border-radius: 8px;
-  height: auto;
-  display: block;
-}
-
-/* ---------- GIF CONTAINER ---------- */
-/*
-.gif-container {
-  display: inline-block;
   max-width: 100%;
-  position: relative;
 }
-*/
 
-/* ---------- GIF + MEDIA CONTAINER FIXES (Step 2 + Step 3) ---------- */
-
-/* Base gif container setup */
+/* GIF container setup */
 .gif-container {
   display: flex;
   flex-direction: column;
@@ -286,19 +221,7 @@ h2 {
   box-sizing: border-box;
 }
 
-/* Shared media styles for images, gifs, iframes */
-.non-video-item,
-.gif-container img,
-.gif-container iframe {
-  width: 100%;
-  max-width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 8px;
-  box-sizing: border-box;
-}
-
-/* Label styling (placed below the media) */
+/* Label styling (below the media) */
 .gif-label,
 .video-label {
   position: static;
@@ -313,7 +236,8 @@ h2 {
   word-wrap: break-word;
 }
 
-/* Flex grid layout for 1, 2, or 3 items */
+/* Flex grid layout for 1, 2, or 3+ items */
+
 .media-1-1 .non-video-item,
 .media-1-1 .gif-container {
   flex: 0 0 100%;
@@ -332,16 +256,7 @@ h2 {
   max-width: calc(33.333% - 0.75em);
 }
 
-/* Container for media grid layout */
-.media-container.non-video-flex {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75em;
-  margin-bottom: 1em;
-  justify-content: space-between; /* more natural spacing */
-}
-
-/* Responsive fallback for small screens */
+/* Responsive stacking on small screens */
 @media (max-width: 600px) {
   .non-video-item,
   .gif-container,
@@ -350,4 +265,20 @@ h2 {
     flex: 0 0 100% !important;
     max-width: 100% !important;
   }
+}
+
+/* ---------- SINGLE IMAGE ONLY (project.media) ---------- */
+
+.media-container.single-image {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1em;
+}
+
+.single-non-video {
+  max-width: 60%; /* Increased from 50% for better visibility */
+  width: 100%;
+  border-radius: 8px;
+  height: auto;
+  display: block;
 }

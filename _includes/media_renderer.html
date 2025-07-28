@@ -15,10 +15,7 @@
     {% endif %}
   {% endfor %}
 
-  {% comment %}
-  {# ----------------- Videos ----------------- #}
-  {% endcomment %}
-  {% comment %} Videos — stacked vertically {% endcomment %}
+  {%- comment -%} Videos — stacked vertically {%- endcomment -%}
   {% assign video_container_class = "video-row single-video" %}
   {% if videos.size > 1 %}
     {% assign video_container_class = "video-row multiple-videos" %}
@@ -38,10 +35,7 @@
     </div>
   {% endfor %}
 
-  {% comment %}
-  {# ----------------- Non-videos ----------------- #}
-  {% endcomment %}
-  {% comment %} Non-videos — 1, 2, or 3-column responsive layout {% endcomment %}
+  {%- comment -%} Non-videos — 1, 2, or 3-column responsive layout {%- endcomment -%}
   {% assign non_video_class = "media-1-1" %}
   {% if non_videos.size == 2 %}
     {% assign non_video_class = "media-1-2" %}
@@ -70,16 +64,22 @@
           {% elsif media_lc contains "youtube.com/watch?v=" %}
             {% assign youtube_id = media_lc | split: "watch?v=" | last | split: "&" | first %}
           {% endif %}
-          <iframe src="https://www.youtube.com/embed/{{ youtube_id }}" frameborder="0" allowfullscreen class="non-video-item"></iframe>
+          <iframe
+            src="https://www.youtube.com/embed/{{ youtube_id }}"
+            frameborder="0"
+            allowfullscreen
+            class="non-video-item"
+            loading="lazy"
+            ></iframe>
         {% elsif is_gif %}
           <div class="gif-container">
-            <img src="{{ media }}" alt="GIF of {{ include.project.title }}" class="non-video-item" />
+            <img src="{{ media }}" alt="GIF of {{ include.project.title }}" class="non-video-item" loading="lazy" />
             {% if label %}
               <div class="gif-label">{{ label }}</div>
             {% endif %}
           </div>
         {% else %}
-          <img src="{{ media }}" alt="{{ include.project.title }} media" class="non-video-item" />
+          <img src="{{ media }}" alt="{{ include.project.title }} media" class="non-video-item" loading="lazy" />
         {% endif %}
       {% endfor %}
     </div>
@@ -102,7 +102,13 @@
       {% assign youtube_id = media_lc | split: "watch?v=" | last | split: "&" | first %}
     {% endif %}
     <div class="media-container video-row single-video">
-      <iframe src="https://www.youtube.com/embed/{{ youtube_id }}" frameborder="0" allowfullscreen class="non-video-item"></iframe>
+      <iframe
+        src="https://www.youtube.com/embed/{{ youtube_id }}"
+        frameborder="0"
+        allowfullscreen
+        class="non-video-item"
+        loading="lazy"
+        ></iframe>
     </div>
   {% elsif ext == "mp4" or ext == "webm" %}
     <div class="media-container video-row single-video">
@@ -113,7 +119,7 @@
     </div>
   {% else %}
     <div class="media-container single-image">
-      <img src="{{ media_url }}" alt="{{ include.project.title }} media" class="single-non-video" />
+      <img src="{{ media_url }}" alt="{{ include.project.title }} media" class="single-non-video" loading="lazy" />
     </div>
   {% endif %}
 {% endif %}
