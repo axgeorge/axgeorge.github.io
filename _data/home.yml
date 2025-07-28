@@ -126,11 +126,11 @@ research_entries:
 
   - title: "CB-GCS: Conflict-Based Search on the Graph of Convex Sets for Multi-Agent Motion Planning"
     media_list:
-    - "/assets/videos/milp.gif"
+    - url: "/assets/videos/milp.gif"
       label: "MILP"
-    - "/assets/videos/kcbs.gif"
+    - url: "/assets/videos/kcbs.gif"
       label: "KCBS"
-    - "/assets/videos/cb-gcs.gif"
+    - url: "/assets/videos/cb-gcs.gif"
       label: "CB-GCS (ours)"
     description: "A new approach for multi-agent motion planning in continuous workspaces."
     journal_conference: "2025 IEEE 21st International Conference on Automation Science and Engineering (CASE 2025)"
