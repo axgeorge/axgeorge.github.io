@@ -196,6 +196,8 @@ h2 {
   gap: 0.75em;
   margin-bottom: 1em;
   justify-content: flex-start;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* Shared styles for images, GIF containers, and iframes */
@@ -207,6 +209,7 @@ h2 {
   box-sizing: border-box;
   width: 100%;
   max-width: 100%;
+  flex-shrink: 0; /* Prevent shrinking */
 }
 
 /* GIF container setup */
@@ -216,7 +219,7 @@ h2 {
   align-items: center;
   text-align: center;
   position: relative;
-  flex: 1 1 auto;
+  flex-grow: 1;
   max-width: 100%;
   box-sizing: border-box;
 }
@@ -242,18 +245,31 @@ h2 {
 .media-1-1 .gif-container {
   flex: 0 0 100%;
   max-width: 100%;
+  min-width: 100%;
 }
 
 .media-1-2 .non-video-item,
 .media-1-2 .gif-container {
-  flex: 0 0 calc(50% - 0.75em);
-  max-width: calc(50% - 0.75em);
+  /* Subtract half gap from each flex-basis for spacing */
+  flex: 0 0 calc(50% - 0.375em);
+  max-width: calc(50% - 0.375em);
+  min-width: calc(50% - 0.375em);
 }
 
 .media-1-3 .non-video-item,
 .media-1-3 .gif-container {
-  flex: 0 0 calc(33.333% - 0.75em);
-  max-width: calc(33.333% - 0.75em);
+  flex: 0 0 calc(33.3333% - 0.5em);
+  max-width: calc(33.3333% - 0.5em);
+  min-width: calc(33.3333% - 0.5em);
+}
+
+/* Ensure images inside non-video items fill their container */
+.non-video-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  box-sizing: border-box;
 }
 
 /* Responsive stacking on small screens */
@@ -264,6 +280,7 @@ h2 {
   .gif-container iframe {
     flex: 0 0 100% !important;
     max-width: 100% !important;
+    min-width: 100% !important;
   }
 }
 
@@ -284,11 +301,11 @@ h2 {
     z-index: 1;
   }
 
-  /* Add bottom padding to containers so labels have space */
-  .gif-container,
-  .non-video-item {
-    padding-bottom: 1.5em;
-  }
+  // /* Add bottom padding to containers so labels have space */
+  // .gif-container,
+  // .non-video-item {
+  //   padding-bottom: 1.5em;
+  // }
 }
 
 
