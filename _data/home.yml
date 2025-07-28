@@ -110,8 +110,8 @@ research_entries:
 
   - title: "A Mixed-Integer Conic Program for the Moving-Target Traveling Salesman Problem based on a Graph of Convex Sets"
     media_list:
-    - "/assets/videos/iros24-arm-conveyor.mp4"
-    - "/assets/videos/iros24-15-tar.mp4"
+    - url: "/assets/videos/iros24-arm-conveyor.mp4"
+    - url: "/assets/videos/iros24-15-tar.mp4"
     description: "A new formulation that finds the optimum for moving-target traveling salesman problems with linear target trajectories."
     journal_conference: "2024 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS 2024)"
     github_link: 
@@ -148,9 +148,9 @@ other_project_entries:
 
   - title: "ROS Gmapping SLAM: Accuracy Analysis Under Lidar Noise Variations"
     media_list: 
-      - "/assets/images/Gazebo_World.JPG"
-      - "/assets/images/Map_1_0.01.jpeg"
-      - "/assets/images/Map_3_0.1.JPG"
+      - url: "/assets/images/Gazebo_World.JPG"
+      - url: "/assets/images/Map_1_0.01.jpeg"
+      - url: "/assets/images/Map_3_0.1.JPG"
     desc: >
       The performance of the ROS Gmapping SLAM package under varying levels
       of simulated Lidar noise is analyzed. By introducing different
@@ -177,9 +177,9 @@ other_project_entries:
 
   - title: "Graph Quest"
     media_list:
-      - "/assets/images/astar.png"
-      - "/assets/images/kruskals.png"
-      - "/assets/images/eultours.png"
+      - url: "/assets/images/astar.png"
+      - url: "/assets/images/kruskals.png"
+      - url: "/assets/images/eultours.png"
     desc: "A visual journey through graph algorithms. Build your own graph instances in an interactive grid world. Visualize how classic algorithms like Kruskal’s, Dijkstra’s, A*, and Depth-First Search solve them in real time."
     venue: 
     github_link: https://github.com/axgeorge/GraphQuest
