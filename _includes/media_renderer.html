@@ -3,31 +3,40 @@
 {% assign non_videos = "" | split: "," %}
 
 {% if include.project.media_list %}
-  {% for media_url in include.project.media_list %}
+  {% for media_entry in include.project.media_list %}
+    {% assign media_url = media_entry.url | default: media_entry %}
     {% assign media_url = media_url | strip %}
     {% assign ext = media_url | downcase | split: "." | last | split: "?" | first %}
+    {% assign media_entry = media_entry | merge: { "url": media_url } %}
     {% if video_extensions contains ext %}
-      {% assign videos = videos | push: media_url %}
+      {% assign videos = videos | push: media_entry %}
     {% else %}
-      {% assign non_videos = non_videos | push: media_url %}
+      {% assign non_videos = non_videos | push: media_entry %}
     {% endif %}
   {% endfor %}
 
+  {# ----------------- Videos ----------------- #}
   {% comment %} Videos — stacked vertically {% endcomment %}
   {% assign video_container_class = "video-row single-video" %}
   {% if videos.size > 1 %}
     {% assign video_container_class = "video-row multiple-videos" %}
   {% endif %}
 
-  {% for video in videos %}
+  {% for video_obj in videos %}
+    {% assign video = video_obj.url %}
+    {% assign label = video_obj.label %}
     <div class="media-container {{ video_container_class }}">
       <video autoplay loop muted playsinline class="video-item">
         <source src="{{ video }}" type="video/{{ video | split: '.' | last | split: '?' | first }}">
         Your browser does not support the video tag.
       </video>
+      {% if label %}
+        <div class="video-label">{{ label }}</div>
+      {% endif %}
     </div>
   {% endfor %}
 
+  {# ----------------- Non-videos ----------------- #}
   {% comment %} Non-videos — 1, 2, or 3-column responsive layout {% endcomment %}
   {% assign non_video_class = "media-1-1" %}
   {% if non_videos.size == 2 %}
@@ -38,9 +47,14 @@
 
   {% if non_videos.size > 0 %}
     <div class="media-container non-video-flex {{ non_video_class }}">
-      {% for media in non_videos %}
+      {% for media_obj in non_videos %}
+        {% assign media = media_obj.url %}
+        {% assign label = media_obj.label %}
         {% assign media_lc = media | downcase %}
+        {% assign ext = media_lc | split: "." | last | split: "?" | first %}
+        {% assign is_gif = ext == "gif" %}
         {% assign is_youtube = false %}
+
         {% if media_lc contains "youtube.com/embed/" or media_lc contains "youtube.com/watch?v=" %}
           {% assign is_youtube = true %}
         {% endif %}
@@ -53,6 +67,13 @@
             {% assign youtube_id = media_lc | split: "watch?v=" | last | split: "&" | first %}
           {% endif %}
           <iframe src="https://www.youtube.com/embed/{{ youtube_id }}" frameborder="0" allowfullscreen class="non-video-item"></iframe>
+        {% elsif is_gif %}
+          <div class="gif-container">
+            <img src="{{ media }}" alt="GIF of {{ include.project.title }}" class="non-video-item" />
+            {% if label %}
+              <div class="gif-label">{{ label }}</div>
+            {% endif %}
+          </div>
         {% else %}
           <img src="{{ media }}" alt="{{ include.project.title }} media" class="non-video-item" />
         {% endif %}
