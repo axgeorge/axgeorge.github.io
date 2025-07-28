@@ -202,16 +202,17 @@ h2 {
 .media-1-2 .non-video-item,
 .media-1-2 .gif-container {
   flex: 0 0 calc(50% - 0.375em); /* half width minus half gap */
-  max-width: calc(50% - 0.375em);
-  min-width: calc(50% - 0.375em);
+  aspect-ratio: 1 / 1;
+  // max-width: calc(50% - 0.375em);
+  // min-width: calc(50% - 0.375em);
 }
 
 /* 3 or more items: one third width minus gap */
 .media-1-3 .non-video-item,
 .media-1-3 .gif-container {
   flex: 0 0 calc(33.333% - 0.5em);
-  max-width: calc(33.333% - 0.5em);
-  min-width: calc(33.333% - 0.5em);
+  // max-width: calc(33.333% - 0.5em);
+  // min-width: calc(33.333% - 0.5em);
 }
 
 /* Shared styles */

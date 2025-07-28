@@ -104,7 +104,7 @@ research_entries:
   - title: "C*: A New Bounding Approach for the Moving-Target Traveling Salesman Problem"
     media: "/assets/videos/tro-cstar-pwl.mp4"
     description: "A new framework that provides optimality guarantees for moving-target traveling salesman problems with generic target trajectories."
-    journal_conference: "2025 IEEE Transactions on Robotics (T-R0)"
+    journal_conference: "2025 IEEE Transactions on Robotics (T-R0 2025)"
     github_link: 
     paper_link: https://arxiv.org/pdf/2312.05499
 
